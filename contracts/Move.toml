@@ -1,0 +1,8 @@
+[package]
+name = "fight_moments"
+edition = "2024.beta"
+
+[dependencies]
+
+[addresses]
+fight_moments = "0x0"
