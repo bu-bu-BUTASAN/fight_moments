@@ -10,13 +10,13 @@
     "check": "biome check --write"
   },
   "dependencies": {
-    "@mysten/dapp-kit": "^0.14.0",
-    "@mysten/sui": "^1.15.0",
+    "@mysten/dapp-kit": "^0.19.9",
+    "@mysten/sui": "^1.45.0",
     "@mysten/walrus": "^0.8.4",
-    "@tanstack/react-query": "^5",
-    "next": "16.0.1",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "@tanstack/react-query": "^5.90.9",
+    "next": "^16.0.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "typescript": "^5",
