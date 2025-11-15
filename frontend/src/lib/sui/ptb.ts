@@ -17,6 +17,8 @@ export function buildRegisterMomentTx(params: {
   videoWalrusUri: string;
   thumbnailWalrusUri: string;
   blobId: string;
+  videoBlobId: string;
+  thumbnailBlobId: string;
   contentHash: string;
   maxSupply: number;
 }) {
@@ -33,6 +35,8 @@ export function buildRegisterMomentTx(params: {
       tx.pure.string(params.videoWalrusUri),
       tx.pure.string(params.thumbnailWalrusUri),
       tx.pure.string(params.blobId),
+      tx.pure.string(params.videoBlobId),
+      tx.pure.string(params.thumbnailBlobId),
       tx.pure.string(params.contentHash),
       tx.pure.u64(params.maxSupply),
     ],

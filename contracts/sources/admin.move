@@ -24,6 +24,8 @@ entry fun register_moment(
     video_uri: String,
     thumbnail_uri: String,
     blob_id: String,
+    video_blob_id: String,
+    thumbnail_blob_id: String,
     content_hash: String,
     max_supply: u64,
     ctx: &mut TxContext
@@ -42,6 +44,8 @@ entry fun register_moment(
         video_uri,
         thumbnail_uri,
         blob_id,
+        video_blob_id,
+        thumbnail_blob_id,
         content_hash
     );
 

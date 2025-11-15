@@ -48,6 +48,8 @@ fun register_test_moment(scenario: &mut Scenario): ID {
         string::utf8(b"walrus://video123"),
         string::utf8(b"walrus://thumb123"),
         string::utf8(b"blob123"),
+        string::utf8(b"video_blob_123"),
+        string::utf8(b"thumb_blob_123"),
         string::utf8(b"hash123"),
         100,
         ts::ctx(scenario)
@@ -460,6 +462,8 @@ fun test_remaining_supply() {
         string::utf8(b"walrus://video456"),
         string::utf8(b"walrus://thumb456"),
         string::utf8(b"blob456"),
+        string::utf8(b"video_blob_456"),
+        string::utf8(b"thumb_blob_456"),
         string::utf8(b"hash456"),
         3,
         ts::ctx(&mut scenario)
@@ -527,6 +531,8 @@ fun test_mint_supply_exhausted() {
         string::utf8(b"walrus://video789"),
         string::utf8(b"walrus://thumb789"),
         string::utf8(b"blob789"),
+        string::utf8(b"video_blob_789"),
+        string::utf8(b"thumb_blob_789"),
         string::utf8(b"hash789"),
         2,
         ts::ctx(&mut scenario)
@@ -611,6 +617,8 @@ fun test_register_invalid_uri() {
         string::utf8(b"invalid://video"),  // Invalid URI scheme
         string::utf8(b"walrus://thumb999"),
         string::utf8(b"blob999"),
+        string::utf8(b"video_blob_999"),
+        string::utf8(b"thumb_blob_999"),
         string::utf8(b"hash999"),
         50,
         ts::ctx(&mut scenario)
@@ -639,6 +647,8 @@ fun test_register_empty_uri() {
         string::utf8(b""),  // Empty video URI
         string::utf8(b"walrus://thumb888"),
         string::utf8(b"blob888"),
+        string::utf8(b"video_blob_888"),
+        string::utf8(b"thumb_blob_888"),
         string::utf8(b"hash888"),
         50,
         ts::ctx(&mut scenario)

@@ -93,7 +93,9 @@ public struct AdminCap has key, store {
 public struct WalrusMedia has store, copy, drop {
     video_uri: String,          // walrus://... (main video)
     thumbnail_uri: String,      // walrus://... (for list view)
-    blob_id: String,            // Walrus blob identifier
+    blob_id: String,            // Walrus blob identifier (deprecated, kept for compatibility)
+    video_blob_id: String,      // Video blob ID for HTTPS URL
+    thumbnail_blob_id: String,  // Thumbnail blob ID for HTTPS URL
     content_hash: String,       // For verification
 }
 
@@ -342,12 +344,16 @@ public(package) fun new_walrus_media(
     video_uri: String,
     thumbnail_uri: String,
     blob_id: String,
+    video_blob_id: String,
+    thumbnail_blob_id: String,
     content_hash: String,
 ): WalrusMedia {
     WalrusMedia {
         video_uri,
         thumbnail_uri,
         blob_id,
+        video_blob_id,
+        thumbnail_blob_id,
         content_hash,
     }
 }
@@ -438,4 +444,14 @@ public(package) fun video_uri(media: &WalrusMedia): String {
 /// Get WalrusMedia thumbnail_uri
 public(package) fun thumbnail_uri(media: &WalrusMedia): String {
     media.thumbnail_uri
+}
+
+/// Get WalrusMedia video_blob_id
+public(package) fun video_blob_id(media: &WalrusMedia): String {
+    media.video_blob_id
+}
+
+/// Get WalrusMedia thumbnail_blob_id
+public(package) fun thumbnail_blob_id(media: &WalrusMedia): String {
+    media.thumbnail_blob_id
 }
