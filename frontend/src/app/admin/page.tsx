@@ -3,33 +3,12 @@
 import { useCurrentAccount } from "@mysten/dapp-kit";
 import { useState } from "react";
 import { MomentRegistrationForm } from "@/components/admin/MomentRegistrationForm";
-import { WalrusUploadForm } from "@/components/admin/WalrusUploadForm";
-import type { WalrusUploadResult } from "@/types/walrus";
 
 export default function AdminPage() {
   const currentAccount = useCurrentAccount();
-  const [uploadResults, setUploadResults] = useState<{
-    video: WalrusUploadResult;
-    thumbnail: WalrusUploadResult;
-  } | null>(null);
-
   const [successDigest, setSuccessDigest] = useState<string | null>(null);
 
-  const handleUploadSuccess = (
-    videoResult: WalrusUploadResult,
-    thumbnailResult: WalrusUploadResult,
-  ) => {
-    setUploadResults({ video: videoResult, thumbnail: thumbnailResult });
-    setSuccessDigest(null);
-  };
-
-  const handleRegistrationSuccess = (digest: string) => {
-    setSuccessDigest(digest);
-    setUploadResults(null);
-  };
-
   const handleReset = () => {
-    setUploadResults(null);
     setSuccessDigest(null);
   };
 
@@ -81,15 +60,7 @@ export default function AdminPage() {
             </div>
           ) : (
             <div className="space-y-8">
-              {!uploadResults ? (
-                <WalrusUploadForm onUploadSuccess={handleUploadSuccess} />
-              ) : (
-                <MomentRegistrationForm
-                  videoResult={uploadResults.video}
-                  thumbnailResult={uploadResults.thumbnail}
-                  onSuccess={handleRegistrationSuccess}
-                />
-              )}
+              <MomentRegistrationForm onSuccess={setSuccessDigest} />
             </div>
           )}
 
