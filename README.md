@@ -303,54 +303,6 @@ display.add(b"image_url", b"https://aggregator.walrus-testnet.walrus.space/v1/{m
 
 ---
 
-## 📦 ローカル実行方法
-
-### 前提条件
-
-- Node.js 20+ または Bun
-- Sui CLI（Smart Contract開発用）
-- Sui Wallet（Chrome拡張）
-
-### セットアップ（3ステップ）
-
-#### 1️⃣ リポジトリクローン
-
-```bash
-git clone https://github.com/YOUR_USERNAME/fight_moments.git
-cd fight_moments
-```
-
-#### 2️⃣ 環境変数設定
-
-```bash
-cd frontend
-cp .env.example .env
-```
-
-`.env`ファイルを編集して、デプロイ済みのContract情報を記載:
-
-```bash
-NEXT_PUBLIC_PACKAGE_ID=0xcb62...  # あなたのPackage ID
-NEXT_PUBLIC_ADMIN_CAP_ID=0x97bb...  # Admin Cap ID
-# その他の環境変数も設定
-```
-
-> 📄 詳細は [`frontend/.env.example`](./frontend/.env.example) を参照
-
-#### 3️⃣ 起動
-
-```bash
-# 依存関係インストール
-bun install  # または npm install
-
-# 開発サーバー起動
-bun dev  # または npm run dev
-```
-
-ブラウザで http://localhost:3000 を開く
-
----
-
 ## 🏆 Sui × ONE Championship ハッカソンへの適合性
 
 ### ONE Championshipへの革新的価値提案
@@ -420,64 +372,6 @@ fight_moments/
 │   └── DEMO_SCRIPT.md     # デモ動画台本
 └── README.md              # 本ドキュメント
 ```
-
----
-
-## 🛣️ ロードマップ
-
-### ✅ Phase 1: MVP（完了）
-
-- [x] Sui Move Contract実装（NFT + Supply管理）
-- [x] Walrus統合（動画アップロード＆配信）
-- [x] Admin登録UI
-- [x] User Mint UI
-- [x] Marketplace基本機能
-- [x] Sui Testnetデプロイ
-
-### 🚧 Phase 2: Enhancement（実装中）
-
-- [x] フロントエンドデプロイ（Cloudflare Pages） ✅ 完了
-- [x] スクリーンショット撮影（2/4枚完了、残りは実装中）
-- [x] デモ動画作成 ✅ 完了
-- [ ] UI/UXブラッシュアップ（実装中）
-
-### 🔮 Phase 3: Future（構想）
-
-- [ ] ONE Championship公式コンテンツ連携
-- [ ] 投票機能（ファンが選ぶベストモーメント）
-- [ ] ロイヤリティ自動分配
-- [ ] クロスチェーン対応（他チェーンへのブリッジ）
-- [ ] モバイルアプリ
-
----
-
-## 🤝 コントリビューション
-
-現在はハッカソン提出版のため、コントリビューションは受け付けておりません。
-プロジェクトへのフィードバックは [Issues](../../issues) までお願いします。
-
----
-
-## 📄 ライセンス
-
-MIT License - 詳細は [LICENSE](./LICENSE) を参照
-
----
-
-## 🙏 謝辞
-
-- **Sui Foundation** - 高速で安全なブロックチェーンインフラ
-- **Walrus Team** - 分散ストレージソリューション
-- **ONE Championship** - 格闘技エンターテインメントの革新
-- **ハッカソン運営チーム** - 素晴らしい機会の提供
-
----
-
-## 📞 コンタクト
-
-プロジェクトに関するお問い合わせ:
-- GitHub Issues: [こちら](../../issues)
-- X (Twitter): [@YOUR_HANDLE]  <!-- 必要に応じて記載 -->
 
 ---
 
@@ -797,54 +691,6 @@ display.add(b"image_url", b"https://aggregator.walrus-testnet.walrus.space/v1/{m
 
 ---
 
-## 📦 Local Setup
-
-### Prerequisites
-
-- Node.js 20+ or Bun
-- Sui CLI (for Smart Contract development)
-- Sui Wallet (Chrome extension)
-
-### Setup (3 Steps)
-
-#### 1️⃣ Clone Repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/fight_moments.git
-cd fight_moments
-```
-
-#### 2️⃣ Environment Variables
-
-```bash
-cd frontend
-cp .env.example .env
-```
-
-Edit `.env` file with your deployed contract information:
-
-```bash
-NEXT_PUBLIC_PACKAGE_ID=0xcb62...  # Your Package ID
-NEXT_PUBLIC_ADMIN_CAP_ID=0x97bb...  # Admin Cap ID
-# Configure other environment variables
-```
-
-> 📄 See [`frontend/.env.example`](./frontend/.env.example) for details
-
-#### 3️⃣ Launch
-
-```bash
-# Install dependencies
-bun install  # or npm install
-
-# Start development server
-bun dev  # or npm run dev
-```
-
-Open http://localhost:3000 in browser
-
----
-
 ## 🏆 Sui × ONE Championship Hackathon Fit
 
 ### Innovative Value Proposition for ONE Championship
@@ -914,64 +760,6 @@ fight_moments/
 │   └── DEMO_SCRIPT.md     # Demo video script
 └── README.md              # This document
 ```
-
----
-
-## 🛣️ Roadmap
-
-### ✅ Phase 1: MVP (Completed)
-
-- [x] Sui Move Contract implementation (NFT + Supply management)
-- [x] Walrus integration (video upload & streaming)
-- [x] Admin registration UI
-- [x] User Mint UI
-- [x] Marketplace basic features
-- [x] Sui Testnet deployment
-
-### 🚧 Phase 2: Enhancement (In Progress)
-
-- [x] Frontend deployment (Cloudflare Pages) ✅ Completed
-- [x] Screenshot capture (2/4 completed, others in progress)
-- [x] Demo video creation ✅ Completed
-- [ ] UI/UX refinement (In progress)
-
-### 🔮 Phase 3: Future (Planned)
-
-- [ ] ONE Championship official content collaboration
-- [ ] Voting feature (fans choose best moment)
-- [ ] Automatic royalty distribution
-- [ ] Cross-chain support (bridge to other chains)
-- [ ] Mobile app
-
----
-
-## 🤝 Contribution
-
-Currently not accepting contributions as this is a hackathon submission.
-For project feedback, please use [Issues](../../issues).
-
----
-
-## 📄 License
-
-MIT License - See [LICENSE](./LICENSE) for details
-
----
-
-## 🙏 Acknowledgments
-
-- **Sui Foundation** - Fast and secure blockchain infrastructure
-- **Walrus Team** - Distributed storage solution
-- **ONE Championship** - Innovation in combat sports entertainment
-- **Hackathon Organizers** - Providing this amazing opportunity
-
----
-
-## 📞 Contact
-
-For inquiries about the project:
-- GitHub Issues: [Here](../../issues)
-- X (Twitter): [@YOUR_HANDLE]  <!-- Add if needed -->
 
 ---
 
