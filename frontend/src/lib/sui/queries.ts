@@ -1,28 +1,30 @@
 /**
- * Sui RPC クエリ関数
+ * Sui RPC query functions
  */
 
+import { Transaction } from "@mysten/sui/transactions";
 import type {
   FightMomentNFT,
   KioskListing,
   MintableMoment,
+  MomentMetadata,
   UserKiosk,
 } from "@/types/contract";
-import { PACKAGE_ID } from "../constants";
+import { MOMENT_REGISTRY_ID, PACKAGE_ID } from "../constants";
 import { suiClient } from "./client";
 
 /**
- * すべての MintableMoment オブジェクトを取得
- * MintableMoment は共有オブジェクトなので、イベントから取得する
+ * Fetch all MintableMoment objects
+ * Since MintableMoment is a shared object, fetch from events
  */
 export async function fetchMintableMoments(): Promise<MintableMoment[]> {
   try {
-    // MomentRegistered イベントを取得して、Moment ID を収集
+    // Fetch MomentRegistered events to collect Moment IDs
     const events = await suiClient.queryEvents({
       query: {
         MoveEventType: `${PACKAGE_ID}::types::MomentRegistered`,
       },
-      limit: 50, // 最新50件
+      limit: 50, // Latest 50 items
     });
 
     const momentIds = events.data.map((event) => {
@@ -34,7 +36,7 @@ export async function fetchMintableMoments(): Promise<MintableMoment[]> {
       return [];
     }
 
-    // 各 Moment オブジェクトを取得
+    // Fetch each Moment object
     const objects = await suiClient.multiGetObjects({
       ids: momentIds,
       options: {
@@ -58,6 +60,8 @@ export async function fetchMintableMoments(): Promise<MintableMoment[]> {
           momentType: fields.moment_type as string,
           videoWalrusUri: (media.video_uri as string) || "",
           thumbnailWalrusUri: (media.thumbnail_uri as string) || "",
+          thumbnailBlobId: (media.thumbnail_blob_id as string) || "",
+          videoBlobId: (media.video_blob_id as string) || "",
           walrusHash: (media.content_hash as string) || "",
           maxSupply: Number(fields.max_supply),
           mintedCount: Number(fields.current_supply || 0),
@@ -74,7 +78,7 @@ export async function fetchMintableMoments(): Promise<MintableMoment[]> {
 }
 
 /**
- * 特定の MintableMoment を ID で取得
+ * Fetch a specific MintableMoment by ID
  */
 export async function fetchMintableMoment(
   momentId: string,
@@ -108,6 +112,8 @@ export async function fetchMintableMoment(
       momentType: fields.moment_type as string,
       videoWalrusUri: (media.video_uri as string) || "",
       thumbnailWalrusUri: (media.thumbnail_uri as string) || "",
+      thumbnailBlobId: (media.thumbnail_blob_id as string) || "",
+      videoBlobId: (media.video_blob_id as string) || "",
       walrusHash: (media.content_hash as string) || "",
       maxSupply: Number(fields.max_supply),
       mintedCount: Number(fields.current_supply || 0),
@@ -120,11 +126,11 @@ export async function fetchMintableMoment(
 }
 
 /**
- * ユーザーが所有する Kiosk を取得
+ * Fetch Kiosks owned by user
  */
 export async function fetchUserKiosks(userAddress: string): Promise<string[]> {
   try {
-    // KioskOwnerCap を検索
+    // Search for KioskOwnerCap
     const response = await suiClient.getOwnedObjects({
       owner: userAddress,
       filter: {
@@ -155,13 +161,13 @@ export async function fetchUserKiosks(userAddress: string): Promise<string[]> {
 }
 
 /**
- * ユーザーが所有する Kiosk と KioskOwnerCap のペア情報を取得
+ * Fetch Kiosk and KioskOwnerCap pair information owned by user
  */
 export async function fetchUserKioskCaps(
   userAddress: string,
 ): Promise<UserKiosk[]> {
   try {
-    // KioskOwnerCap を検索
+    // Search for KioskOwnerCap
     const response = await suiClient.getOwnedObjects({
       owner: userAddress,
       filter: {
@@ -195,13 +201,13 @@ export async function fetchUserKioskCaps(
 }
 
 /**
- * ユーザーが所有する Fight Moment NFT を取得
+ * Fetch Fight Moment NFTs owned by user
  */
 export async function fetchUserNFTs(
   userAddress: string,
 ): Promise<FightMomentNFT[]> {
   try {
-    // NFTMinted イベントを取得してユーザーのNFTを特定
+    // Fetch NFTMinted events to identify user's NFTs
     const events = await suiClient.queryEvents({
       query: {
         MoveEventType: `${PACKAGE_ID}::types::NFTMinted`,
@@ -209,7 +215,7 @@ export async function fetchUserNFTs(
       limit: 100,
     });
 
-    // ユーザーがミントしたNFT IDを収集
+    // Collect NFT IDs minted by user
     const userNftIds: string[] = [];
     for (const event of events.data) {
       const parsedJson = event.parsedJson as Record<string, unknown>;
@@ -222,7 +228,7 @@ export async function fetchUserNFTs(
       return [];
     }
 
-    // 各NFTオブジェクトを取得
+    // Fetch each NFT object
     const objects = await suiClient.multiGetObjects({
       ids: userNftIds,
       options: {
@@ -264,11 +270,11 @@ export async function fetchUserNFTs(
 }
 
 /**
- * Marketplace に出品中の Fight Moment NFT を取得
+ * Fetch Fight Moment NFTs listed on Marketplace
  */
 export async function fetchMarketplaceListings(): Promise<KioskListing[]> {
   try {
-    // ItemListed イベントを取得
+    // Fetch ItemListed events
     const events = await suiClient.queryEvents({
       query: {
         MoveEventType: "0x2::kiosk::ItemListed",
@@ -276,7 +282,7 @@ export async function fetchMarketplaceListings(): Promise<KioskListing[]> {
       limit: 100,
     });
 
-    // Fight Moments NFT の出品のみフィルタリング
+    // Filter only Fight Moments NFT listings
     const listings: Array<{
       nftId: string;
       kioskId: string;
@@ -287,7 +293,7 @@ export async function fetchMarketplaceListings(): Promise<KioskListing[]> {
       const parsedJson = event.parsedJson as Record<string, unknown>;
       const itemType = parsedJson.type as string | undefined;
 
-      // Fight Moments NFT の型チェック
+      // Check for Fight Moments NFT type
       if (itemType?.includes("FightMomentNFT")) {
         listings.push({
           nftId: parsedJson.id as string,
@@ -301,7 +307,7 @@ export async function fetchMarketplaceListings(): Promise<KioskListing[]> {
       return [];
     }
 
-    // 各NFTオブジェクトを取得
+    // Fetch each NFT object
     const nftIds = listings.map((l) => l.nftId);
     const objects = await suiClient.multiGetObjects({
       ids: nftIds,
@@ -338,7 +344,7 @@ export async function fetchMarketplaceListings(): Promise<KioskListing[]> {
           nftId: listings[i].nftId,
           nft,
           price: listings[i].price,
-          seller: "", // Kiosk システムでは販売者情報は直接取得できない
+          seller: "", // Seller information cannot be directly obtained in Kiosk system
           kioskId: listings[i].kioskId,
         });
       }
@@ -348,5 +354,98 @@ export async function fetchMarketplaceListings(): Promise<KioskListing[]> {
   } catch (error) {
     console.error("Failed to fetch marketplace listings:", error);
     throw error;
+  }
+}
+
+/**
+ * Fetch all Moment metadata from MomentRegistry (using devInspect)
+ * Can retrieve data without consuming gas
+ */
+export async function fetchMomentsFromRegistry(): Promise<MomentMetadata[]> {
+  try {
+    if (!MOMENT_REGISTRY_ID) {
+      console.warn("MOMENT_REGISTRY_ID is not set");
+      return [];
+    }
+
+    // Build Transaction
+    const tx = new Transaction();
+
+    // Call registry::get_active_moments()
+    tx.moveCall({
+      target: `${PACKAGE_ID}::registry::get_active_moments`,
+      arguments: [tx.object(MOMENT_REGISTRY_ID)],
+    });
+
+    // Execute with devInspect (transaction is not submitted)
+    const result = await suiClient.devInspectTransactionBlock({
+      transactionBlock: tx,
+      sender: "0x0", // Dummy address
+    });
+
+    // Parse result
+    if (result.results && result.results[0]) {
+      const returnValues = result.results[0].returnValues;
+      if (returnValues && returnValues[0]) {
+        const [bytes] = returnValues[0];
+
+        // BCS deserialize
+        // Note: Actual deserialization requires using BCS library
+        // Currently using direct parse method
+
+        // Processing when available directly from returnValues
+        // TODO: Modify here if BCS deserialization implementation is needed
+
+        // Temporarily return empty array (complete implementation after deployment)
+        console.log("devInspect result:", result);
+        return [];
+      }
+    }
+
+    return [];
+  } catch (error) {
+    console.error("Failed to fetch moments from registry:", error);
+    // Fallback: Use existing event-based fetch
+    return [];
+  }
+}
+
+/**
+ * Fetch single Moment metadata from MomentRegistry
+ */
+export async function fetchMomentFromRegistry(
+  momentId: string,
+): Promise<MomentMetadata | null> {
+  try {
+    if (!MOMENT_REGISTRY_ID) {
+      console.warn("MOMENT_REGISTRY_ID is not set");
+      return null;
+    }
+
+    const tx = new Transaction();
+
+    tx.moveCall({
+      target: `${PACKAGE_ID}::registry::get_moment`,
+      arguments: [tx.object(MOMENT_REGISTRY_ID), tx.pure.id(momentId)],
+    });
+
+    const result = await suiClient.devInspectTransactionBlock({
+      transactionBlock: tx,
+      sender: "0x0",
+    });
+
+    if (result.results && result.results[0]) {
+      const returnValues = result.results[0].returnValues;
+      if (returnValues && returnValues[0]) {
+        // TODO: Implement BCS deserialization
+        console.log("devInspect result for single moment:", result);
+        return null;
+      }
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Failed to fetch moment from registry:", error);
+    return null;
   }
 }

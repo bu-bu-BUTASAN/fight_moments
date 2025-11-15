@@ -13,11 +13,13 @@ use fight_moments::types::{
     WalrusMedia
 };
 use fight_moments::minting;
+use fight_moments::registry::{Self, MomentRegistry};
 
 // ===== User Minting Functions =====
 
 /// Mint an NFT and lock it in user's Kiosk
 entry fun mint_and_lock(
+    moment_registry: &mut MomentRegistry,
     moment: &mut MintableMoment,
     kiosk: &mut Kiosk,
     kiosk_cap: &KioskOwnerCap,
@@ -27,11 +29,17 @@ entry fun mint_and_lock(
 ) {
     let nft = minting::mint_moment_internal(moment, clock, ctx);
     kiosk::lock(kiosk, kiosk_cap, policy, nft);
+
+    // Update registry supply
+    let moment_id = object::id(moment);
+    let current_supply = types::current_supply(moment);
+    registry::update_moment_supply(moment_registry, moment_id, current_supply);
 }
 
 /// Create a new Kiosk and mint an NFT (for first-time users)
 #[allow(lint(self_transfer))]
 entry fun create_kiosk_and_mint(
+    moment_registry: &mut MomentRegistry,
     moment: &mut MintableMoment,
     policy: &TransferPolicy<FightMomentNFT>,
     clock: &Clock,
@@ -39,13 +47,18 @@ entry fun create_kiosk_and_mint(
 ) {
     // Create new Kiosk
     let (mut kiosk, kiosk_cap) = kiosk::new(ctx);
-    
+
     // Mint NFT
     let nft = minting::mint_moment_internal(moment, clock, ctx);
-    
+
     // Lock NFT in Kiosk
     kiosk::lock(&mut kiosk, &kiosk_cap, policy, nft);
-    
+
+    // Update registry supply
+    let moment_id = object::id(moment);
+    let current_supply = types::current_supply(moment);
+    registry::update_moment_supply(moment_registry, moment_id, current_supply);
+
     // Transfer Kiosk ownership to user
     transfer::public_share_object(kiosk);
     transfer::public_transfer(kiosk_cap, tx_context::sender(ctx));

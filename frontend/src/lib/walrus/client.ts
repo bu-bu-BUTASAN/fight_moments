@@ -1,15 +1,15 @@
 /**
- * Walrus SDK のセットアップ
+ * Walrus SDK setup
  */
 
 import { WALRUS_RELAY_URL } from "../constants";
 
 /**
- * Walrus の設定
+ * Walrus configuration
  */
 export const walrusConfig = {
   relayUrl: WALRUS_RELAY_URL,
-  // リトライ設定
+  // Retry settings
   maxRetries: 3,
-  retryDelay: 1000, // 1秒
+  retryDelay: 1000, // 1 second
 };

@@ -3,6 +3,7 @@
 import { useCurrentAccount } from "@mysten/dapp-kit";
 import { useState } from "react";
 import { NFTsList } from "@/components/mynfts/NFTsList";
+import { getSuiscanUrl } from "@/lib/constants";
 
 export default function MyNFTsPage() {
   const currentAccount = useCurrentAccount();
@@ -10,7 +11,7 @@ export default function MyNFTsPage() {
 
   const handleListSuccess = (digest: string) => {
     setSuccessDigest(digest);
-    // 5秒後に成功メッセージを自動で消す
+    // Auto-dismiss success message after 5 seconds
     setTimeout(() => {
       setSuccessDigest(null);
     }, 5000);
@@ -18,30 +19,30 @@ export default function MyNFTsPage() {
 
   if (!currentAccount) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">My NFTs</h1>
-          <p className="text-gray-600">ウォレットを接続してください</p>
+          <h1 className="text-2xl font-bold text-white mb-4">My NFTs</h1>
+          <p className="text-gray-400">Please connect your wallet</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black py-8">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">My NFTs</h1>
-          <p className="text-gray-600">あなたが所有する Fight Moments NFT</p>
+          <h1 className="text-3xl font-bold text-white mb-2">🏆 My NFTs</h1>
+          <p className="text-gray-400">Your Fight Moments NFT collection</p>
         </div>
 
-        {/* 成功メッセージ */}
+        {/* Success Message */}
         {successDigest && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+          <div className="mb-6 p-4 bg-gray-900 border border-red-500 rounded-lg shadow-lg">
             <div className="flex items-start">
               <div className="flex-shrink-0">
                 <svg
-                  className="h-5 w-5 text-green-400"
+                  className="h-5 w-5 text-red-400"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -54,38 +55,38 @@ export default function MyNFTsPage() {
                 </svg>
               </div>
               <div className="ml-3 flex-1">
-                <h3 className="text-sm font-medium text-green-800">
-                  NFTの出品が成功しました！
+                <h3 className="text-sm font-medium text-white">
+                  NFT listed successfully!
                 </h3>
-                <p className="text-sm text-green-700 mt-1 break-all">
-                  Transaction: {successDigest}
+                <p className="text-xs text-gray-400 mt-1 break-all">
+                  Transaction: {successDigest.slice(0, 20)}...
                 </p>
                 <a
-                  href={`https://testnet.suivision.xyz/txblock/${successDigest}`}
+                  href={getSuiscanUrl(successDigest)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-green-700 hover:text-green-900 underline mt-1 inline-block"
+                  className="text-xs text-red-400 hover:text-red-300 underline mt-1 inline-block"
                 >
-                  Explorerで確認 →
+                  View on Suiscan →
                 </a>
               </div>
             </div>
           </div>
         )}
 
-        {/* NFTs リスト */}
+        {/* NFTs List */}
         <NFTsList
           userAddress={currentAccount.address}
           onListSuccess={handleListSuccess}
         />
 
-        {/* ウォレット情報 */}
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <h3 className="text-sm font-medium text-gray-700 mb-2">
-              接続中のウォレット
+        {/* Wallet Info */}
+        <div className="mt-8 pt-6 border-t border-gray-800">
+          <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-sm">
+            <h3 className="text-sm font-medium text-gray-400 mb-2">
+              Connected Wallet
             </h3>
-            <p className="text-sm text-gray-600 font-mono break-all">
+            <p className="text-xs text-gray-500 font-mono break-all">
               {currentAccount.address}
             </p>
           </div>

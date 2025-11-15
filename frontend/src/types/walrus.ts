@@ -1,5 +1,5 @@
 /**
- * Walrus アップロード結果の型定義
+ * Type definitions for Walrus upload results
  */
 
 export interface WalrusUploadResult {

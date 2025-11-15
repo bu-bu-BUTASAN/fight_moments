@@ -1,5 +1,5 @@
 /**
- * Walrus アップロード用カスタムフック
+ * Custom hook for Walrus upload
  */
 
 import { useState } from "react";
@@ -38,33 +38,33 @@ export function useWalrusUpload() {
     });
 
     try {
-      // 動画形式のバリデーション
+      // Validate video format
       if (!validateVideoFormat(videoFile)) {
         throw new Error(
-          "動画ファイルは MP4, WebM, または Ogg 形式である必要があります",
+          "Video file must be in MP4, WebM, or Ogg format",
         );
       }
 
-      // サムネイル形式のバリデーション
+      // Validate thumbnail format
       if (!validateImageFormat(thumbnailFile)) {
         throw new Error(
-          "サムネイル画像は JPEG, PNG, または WebP 形式である必要があります",
+          "Thumbnail image must be in JPEG, PNG, or WebP format",
         );
       }
 
-      // 動画の長さをチェック
+      // Check video duration
       await validateVideoDuration(videoFile);
 
       setState((prev) => ({ ...prev, progress: 10 }));
 
-      // 動画をアップロード
+      // Upload video
       const videoResult = await uploadToWalrus(videoFile, (percentage) => {
         setState((prev) => ({ ...prev, progress: 10 + percentage * 0.4 }));
       });
 
       setState((prev) => ({ ...prev, progress: 50, videoResult }));
 
-      // サムネイルをアップロード
+      // Upload thumbnail
       const thumbnailResult = await uploadToWalrus(
         thumbnailFile,
         (percentage) => {
@@ -83,7 +83,7 @@ export function useWalrusUpload() {
       return { videoResult, thumbnailResult };
     } catch (error) {
       const errorMessage =
-        error instanceof Error ? error.message : "アップロードに失敗しました";
+        error instanceof Error ? error.message : "Upload failed";
 
       setState({
         isUploading: false,

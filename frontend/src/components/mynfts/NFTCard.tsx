@@ -1,13 +1,13 @@
 "use client";
 
 import { useSignAndExecuteTransaction } from "@mysten/dapp-kit";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { suiToMist } from "@/lib/constants";
 import { buildDelistNFTTx, buildListNFTTx } from "@/lib/sui/ptb";
-import { getWalrusViewUrl } from "@/lib/walrus/upload";
+
 import type { FightMomentNFT } from "@/types/contract";
 import { momentTypeToString } from "@/types/contract";
+import { VideoPreviewModal } from "./VideoPreviewModal";
 
 interface NFTCardProps {
   nft: FightMomentNFT;
@@ -23,6 +23,7 @@ export function NFTCard({
   onListSuccess,
 }: NFTCardProps) {
   const [showListForm, setShowListForm] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
   const [price, setPrice] = useState<string>("");
   const [isListing, setIsListing] = useState(false);
   const [isDelisting, setIsDelisting] = useState(false);
@@ -31,23 +32,22 @@ export function NFTCard({
 
   const { mutate: signAndExecute } = useSignAndExecuteTransaction();
 
-  const [thumbnailSrc, setThumbnailSrc] = useState(() =>
-    getWalrusViewUrl(nft.thumbnailUri),
-  );
+  const thumbnailSrc = "/sample_contents/image.png";
+  const videoUrl = "/sample_contents/videoplayback.mp4";
 
-  useEffect(() => {
-    setThumbnailSrc(getWalrusViewUrl(nft.thumbnailUri));
-  }, [nft.thumbnailUri]);
+  const handleImageError = () => {
+    console.log("[NFTCard] Image load failed");
+  };
 
   const handleList = () => {
     if (!kioskId || !kioskCapId) {
-      setError("Kiosk情報が見つかりません");
+      setError("Kiosk information not found");
       return;
     }
 
     const priceNum = Number.parseFloat(price);
     if (Number.isNaN(priceNum) || priceNum <= 0) {
-      setError("有効な価格を入力してください");
+      setError("Please enter a valid price");
       return;
     }
 
@@ -88,7 +88,7 @@ export function NFTCard({
       setError(
         err instanceof Error
           ? err.message
-          : "トランザクションの構築に失敗しました",
+          : "Failed to build transaction",
       );
       setIsListing(false);
     }
@@ -96,7 +96,7 @@ export function NFTCard({
 
   const handleDelist = () => {
     if (!kioskId || !kioskCapId) {
-      setError("Kiosk情報が見つかりません");
+      setError("Kiosk information not found");
       return;
     }
 
@@ -133,126 +133,154 @@ export function NFTCard({
       setError(
         err instanceof Error
           ? err.message
-          : "トランザクションの構築に失敗しました",
+          : "Failed to build transaction",
       );
       setIsDelisting(false);
     }
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      {/* サムネイル */}
-      <div className="relative aspect-video bg-gray-100">
-        <Image
-          src={thumbnailSrc}
-          alt={`${nft.fighterA} vs ${nft.fighterB}`}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 33vw"
-          unoptimized
-          onError={() => setThumbnailSrc("/placeholder-thumbnail.png")}
-        />
-        <div className="absolute top-2 right-2 bg-black bg-opacity-75 px-2 py-1 rounded">
-          <span className="text-white text-xs font-bold">
-            #{nft.serialNumber}
-          </span>
-        </div>
-      </div>
+    <>
+      <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:border-red-500 group">
+        {/* Thumbnail */}
+        <button
+          type="button"
+          className="relative aspect-video bg-gray-900 w-full cursor-pointer border-0 p-0"
+          onClick={() => setShowPreview(true)}
+          aria-label="Play video"
+        >
+          <img
+            src={thumbnailSrc}
+            alt={`${nft.fighterA} vs ${nft.fighterB}`}
+            className="object-cover group-hover:scale-105 transition-transform duration-300 w-full h-full"
+            loading="eager"
+            onError={handleImageError}
+          />
 
-      {/* 詳細 */}
-      <div className="p-4">
-        <div className="mb-3">
-          <h3 className="text-lg font-bold text-gray-900">
-            {nft.fighterA} vs {nft.fighterB}
-          </h3>
-          <p className="text-sm text-gray-600">Match: {nft.matchId}</p>
-        </div>
-
-        <div className="flex items-center justify-between mb-3">
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-            {momentTypeToString(nft.momentType)}
-          </span>
-          <span className="text-xs text-gray-500">
-            {new Date(nft.mintedAt).toLocaleDateString()}
-          </span>
-        </div>
-
-        {/* 出品フォーム */}
-        {isListed ? (
-          <div className="space-y-2">
-            <div className="bg-blue-50 border border-blue-200 rounded-md p-2 mb-2">
-              <p className="text-xs text-blue-700 text-center">
-                このNFTは出品中です
-              </p>
+          {/* Play button overlay */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all">
+            <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+              <svg
+                className="w-8 h-8 text-white ml-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <title>Play</title>
+                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+              </svg>
             </div>
-            {error && <p className="text-xs text-red-600">{error}</p>}
+          </div>
+
+          <div className="absolute top-2 right-2 bg-red-600 bg-opacity-90 px-2 py-1 rounded-md shadow-lg">
+            <span className="text-white text-xs font-bold">
+              #{nft.serialNumber}
+            </span>
+          </div>
+        </button>
+
+        {/* Details */}
+        <div className="p-4">
+          <div className="mb-3">
+            <h3 className="text-lg font-bold text-white">
+              {nft.fighterA} vs {nft.fighterB}
+            </h3>
+            <p className="text-sm text-gray-400">Match: {nft.matchId}</p>
+          </div>
+
+          <div className="flex items-center justify-between mb-3">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-900 text-red-200 border border-red-700">
+              {momentTypeToString(nft.momentType)}
+            </span>
+            <span className="text-xs text-gray-500">
+              {new Date(nft.mintedAt).toLocaleDateString()}
+            </span>
+          </div>
+
+          {/* Listing form */}
+          {isListed ? (
+            <div className="space-y-2">
+              <div className="bg-red-950 border border-red-800 rounded-md p-2 mb-2">
+                <p className="text-xs text-red-300 text-center font-medium">
+                  📢 This NFT is currently listed
+                </p>
+              </div>
+              {error && <p className="text-xs text-red-400">{error}</p>}
+              <button
+                type="button"
+                onClick={handleDelist}
+                disabled={isDelisting || !kioskId || !kioskCapId}
+                className="w-full px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium border border-gray-600"
+              >
+                {isDelisting ? "Canceling..." : "Cancel Listing"}
+              </button>
+            </div>
+          ) : !showListForm ? (
             <button
               type="button"
-              onClick={handleDelist}
-              disabled={isDelisting || !kioskId || !kioskCapId}
-              className="w-full px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              onClick={() => setShowListForm(true)}
+              disabled={!kioskId || !kioskCapId}
+              className="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium shadow-lg"
             >
-              {isDelisting ? "取消中..." : "出品を取り消す"}
+              💎 List for Sale
             </button>
-          </div>
-        ) : !showListForm ? (
-          <button
-            type="button"
-            onClick={() => setShowListForm(true)}
-            disabled={!kioskId || !kioskCapId}
-            className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
-          >
-            出品する
-          </button>
-        ) : (
-          <div className="space-y-2">
-            <div>
-              <label
-                htmlFor={`price-${nft.id}`}
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                価格 (SUI)
-              </label>
-              <input
-                id={`price-${nft.id}`}
-                type="number"
-                step="0.1"
-                min="0"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                placeholder="例: 10.5"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                disabled={isListing}
-              />
-            </div>
+          ) : (
+            <div className="space-y-2">
+              <div>
+                <label
+                  htmlFor={`price-${nft.id}`}
+                  className="block text-sm font-medium text-gray-300 mb-1"
+                >
+                  Price (SUI)
+                </label>
+                <input
+                  id={`price-${nft.id}`}
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  placeholder="e.g. 10.5"
+                  className="w-full px-3 py-2 bg-gray-900 border border-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  disabled={isListing}
+                />
+              </div>
 
-            {error && <p className="text-xs text-red-600">{error}</p>}
+              {error && <p className="text-xs text-red-400">{error}</p>}
 
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={handleList}
-                disabled={isListing || !price}
-                className="flex-1 px-3 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
-              >
-                {isListing ? "出品中..." : "確定"}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowListForm(false);
-                  setPrice("");
-                  setError(null);
-                }}
-                disabled={isListing}
-                className="flex-1 px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 text-sm font-medium"
-              >
-                キャンセル
-              </button>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={handleList}
+                  disabled={isListing || !price}
+                  className="flex-1 px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                >
+                  {isListing ? "Listing..." : "✓ Confirm"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowListForm(false);
+                    setPrice("");
+                    setError(null);
+                  }}
+                  disabled={isListing}
+                  className="flex-1 px-3 py-2 bg-gray-700 text-gray-300 rounded-md hover:bg-gray-600 disabled:opacity-50 text-sm font-medium border border-gray-600"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* Video preview modal */}
+      <VideoPreviewModal
+        isOpen={showPreview}
+        onClose={() => setShowPreview(false)}
+        videoUrl={videoUrl}
+        title={`${nft.fighterA} vs ${nft.fighterB}`}
+      />
+    </>
   );
 }

@@ -1,9 +1,9 @@
 /**
- * Fight Moments NFT コントラクトの型定義
+ * Type definitions for Fight Moments NFT contract
  */
 
 /**
- * Moment の種類（コントラクトでは String 型）
+ * Moment types (String type in contract)
  */
 export const MOMENT_TYPES = {
   KO: "KO",
@@ -17,14 +17,14 @@ export const MOMENT_TYPES = {
 export type MomentType = (typeof MOMENT_TYPES)[keyof typeof MOMENT_TYPES];
 
 /**
- * Moment の種類を表示用文字列に変換
+ * Convert moment type to display string
  */
 export function momentTypeToString(type: string): string {
   return type;
 }
 
 /**
- * Mintable Moment オブジェクト
+ * Mintable Moment object
  */
 export interface MintableMoment {
   id: string;
@@ -34,6 +34,8 @@ export interface MintableMoment {
   momentType: string;
   videoWalrusUri: string;
   thumbnailWalrusUri: string;
+  thumbnailBlobId: string;
+  videoBlobId: string;
   walrusHash: string;
   maxSupply: number;
   mintedCount: number;
@@ -42,7 +44,7 @@ export interface MintableMoment {
 }
 
 /**
- * Fight Moment NFT オブジェクト
+ * Fight Moment NFT object
  */
 export interface FightMomentNFT {
   id: string;
@@ -60,7 +62,7 @@ export interface FightMomentNFT {
 }
 
 /**
- * Kiosk Listing 情報
+ * Kiosk listing information
  */
 export interface KioskListing {
   nftId: string;
@@ -71,9 +73,42 @@ export interface KioskListing {
 }
 
 /**
- * Kiosk と KioskOwnerCap のペア情報
+ * Pair information for Kiosk and KioskOwnerCap
  */
 export interface UserKiosk {
   kioskId: string;
   capId: string;
+}
+
+/**
+ * Moment Registry metadata
+ * Corresponds to MomentMetadata struct in Contract
+ */
+export interface MomentMetadata {
+  moment_id: string;
+  match_id: string;
+  fighter_a: string;
+  fighter_b: string;
+  moment_type: string;
+  video_blob_id: string;
+  thumbnail_blob_id: string;
+  max_supply: string;
+  current_supply: string;
+  creator: string;
+  is_active: boolean;
+}
+
+/**
+ * Moment Registry object
+ */
+export interface MomentRegistry {
+  id: { id: string };
+  moments: {
+    type: string;
+    fields: {
+      id: { id: string };
+      size: string;
+    };
+  };
+  moment_ids: string[];
 }

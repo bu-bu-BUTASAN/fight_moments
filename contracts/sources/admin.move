@@ -11,12 +11,14 @@ use fight_moments::types::{
 };
 use fight_moments::minting;
 use fight_moments::royalty_config;
+use fight_moments::registry::{Self, MomentRegistry};
 use sui::transfer_policy::{TransferPolicy, TransferPolicyCap};
 
 /// Register a new mintable moment
 /// Only admin can call this function
 entry fun register_moment(
-    _admin_cap: &AdminCap,
+    moment_registry: &mut MomentRegistry,
+    admin_cap: &AdminCap,
     match_id: String,
     fighter_a: String,
     fighter_b: String,
@@ -24,6 +26,8 @@ entry fun register_moment(
     video_uri: String,
     thumbnail_uri: String,
     blob_id: String,
+    video_blob_id: String,
+    thumbnail_blob_id: String,
     content_hash: String,
     max_supply: u64,
     ctx: &mut TxContext
@@ -42,6 +46,8 @@ entry fun register_moment(
         video_uri,
         thumbnail_uri,
         blob_id,
+        video_blob_id,
+        thumbnail_blob_id,
         content_hash
     );
 
@@ -57,13 +63,33 @@ entry fun register_moment(
         ctx
     );
 
+    // Get moment ID for registry
+    let moment_id = object::id(&moment);
+    let creator = tx_context::sender(ctx);
+
+    // Create metadata for registry
+    let metadata = registry::new_metadata(
+        moment_id,
+        match_id,
+        fighter_a,
+        fighter_b,
+        moment_type,
+        video_blob_id,
+        thumbnail_blob_id,
+        max_supply,
+        creator,
+    );
+
+    // Add to registry
+    registry::add_moment_to_registry(moment_registry, admin_cap, moment_id, metadata);
+
     // Emit event
     types::emit_moment_registered(
-        object::id(&moment),
+        moment_id,
         types::match_id(&moment),
         types::moment_type(&moment),
         max_supply,
-        types::creator(&moment),
+        creator,
     );
 
     // Share the moment object

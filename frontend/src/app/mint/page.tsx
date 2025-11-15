@@ -2,7 +2,11 @@
 
 import { useCurrentAccount } from "@mysten/dapp-kit";
 import { useState } from "react";
+import { LiveHeader } from "@/components/mint/LiveHeader";
+import { LiveStats } from "@/components/mint/LiveStats";
+import { LiveStreamEmbed } from "@/components/mint/LiveStreamEmbed";
 import { MomentsList } from "@/components/mint/MomentsList";
+import { getSuiscanUrl } from "@/lib/constants";
 
 export default function MintPage() {
   const currentAccount = useCurrentAccount();
@@ -10,7 +14,7 @@ export default function MintPage() {
 
   const handleMintSuccess = (digest: string) => {
     setSuccessDigest(digest);
-    // 5秒後に成功メッセージを自動で消す
+    // Auto-dismiss success message after 5 seconds
     setTimeout(() => {
       setSuccessDigest(null);
     }, 5000);
@@ -23,31 +27,25 @@ export default function MintPage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             Fight Moments Mint
           </h1>
-          <p className="text-gray-600">ウォレットを接続してください</p>
+          <p className="text-gray-600">Please connect your wallet</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Fight Moments Mint
-          </h1>
-          <p className="text-gray-600">
-            お気に入りの格闘技シーンをNFTとしてミントしよう
-          </p>
-        </div>
+    <div className="h-[calc(100vh-64px)] flex flex-col bg-black overflow-hidden">
+      {/* Live Header */}
+      <LiveHeader />
 
-        {/* 成功メッセージ */}
-        {successDigest && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+      {/* Success Toast Notification */}
+      {successDigest && (
+        <div className="fixed top-20 right-4 z-50 max-w-md animate-slide-in-right">
+          <div className="bg-gray-900 border border-red-500 rounded-lg shadow-lg p-4">
             <div className="flex items-start">
               <div className="flex-shrink-0">
                 <svg
-                  className="h-5 w-5 text-green-400"
+                  className="h-5 w-5 text-red-400"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -60,40 +58,55 @@ export default function MintPage() {
                 </svg>
               </div>
               <div className="ml-3 flex-1">
-                <h3 className="text-sm font-medium text-green-800">
-                  Mint が成功しました！
+                <h3 className="text-sm font-medium text-white">
+                  Mint successful!
                 </h3>
-                <p className="text-sm text-green-700 mt-1 break-all">
-                  Transaction: {successDigest}
+                <p className="text-xs text-gray-400 mt-1 break-all">
+                  Transaction: {successDigest.slice(0, 20)}...
                 </p>
                 <a
-                  href={`https://testnet.suivision.xyz/txblock/${successDigest}`}
+                  href={getSuiscanUrl(successDigest)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-green-700 hover:text-green-900 underline mt-1 inline-block"
+                  className="text-xs text-red-400 hover:text-red-300 underline mt-1 inline-block"
                 >
-                  Explorerで確認 →
+                  View on Suiscan →
                 </a>
               </div>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Moments リスト */}
-        <MomentsList onMintSuccess={handleMintSuccess} />
+      {/* Split Screen Layout: 60% Video + 40% Mint List */}
+      <div className="flex-1 grid grid-cols-[3fr_2fr] gap-0 overflow-hidden">
+        {/* Left: Live Stream (60%) */}
+        <div className="bg-black p-6 flex items-center justify-center overflow-hidden">
+          <div className="w-full max-w-5xl">
+            <LiveStreamEmbed videoId="1xoyLZ2VgVE" />
+          </div>
+        </div>
 
-        {/* ウォレット情報 */}
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <h3 className="text-sm font-medium text-gray-700 mb-2">
-              接続中のウォレット
-            </h3>
-            <p className="text-sm text-gray-600 font-mono break-all">
-              {currentAccount.address}
-            </p>
+        {/* Right: Mintable Moments Sidebar (40%) */}
+        <div className="bg-gray-900 overflow-y-auto">
+          <div className="p-6">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">
+                🔥 Mintable Moments
+              </h2>
+              <p className="text-sm text-gray-400">
+                Mint now while watching the match! Once gone, they're gone
+                forever
+              </p>
+            </div>
+
+            <MomentsList onMintSuccess={handleMintSuccess} />
           </div>
         </div>
       </div>
+
+      {/* Live Stats Footer */}
+      <LiveStats />
     </div>
   );
 }

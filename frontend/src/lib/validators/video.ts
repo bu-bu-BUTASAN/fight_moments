@@ -1,11 +1,11 @@
 /**
- * 動画ファイルのバリデーション
+ * Video file validation
  */
 
 import { MAX_VIDEO_DURATION_SECONDS } from "../constants";
 
 /**
- * 動画の長さをチェックする
+ * Check video duration
  */
 export async function validateVideoDuration(file: File): Promise<boolean> {
   return new Promise((resolve, reject) => {
@@ -19,7 +19,7 @@ export async function validateVideoDuration(file: File): Promise<boolean> {
       if (duration > MAX_VIDEO_DURATION_SECONDS) {
         reject(
           new Error(
-            `動画の長さは${MAX_VIDEO_DURATION_SECONDS}秒以内である必要があります`,
+            `Video duration must be within ${MAX_VIDEO_DURATION_SECONDS} seconds`,
           ),
         );
       } else {
@@ -29,7 +29,7 @@ export async function validateVideoDuration(file: File): Promise<boolean> {
 
     video.onerror = () => {
       window.URL.revokeObjectURL(video.src);
-      reject(new Error("動画ファイルの読み込みに失敗しました"));
+      reject(new Error("Failed to load video file"));
     };
 
     video.src = URL.createObjectURL(file);
@@ -37,7 +37,7 @@ export async function validateVideoDuration(file: File): Promise<boolean> {
 }
 
 /**
- * 動画ファイルの形式をチェックする
+ * Check video file format
  */
 export function validateVideoFormat(file: File): boolean {
   const validFormats = ["video/mp4", "video/webm", "video/ogg"];
@@ -45,7 +45,7 @@ export function validateVideoFormat(file: File): boolean {
 }
 
 /**
- * 画像ファイルの形式をチェックする
+ * Check image file format
  */
 export function validateImageFormat(file: File): boolean {
   const validFormats = ["image/jpeg", "image/jpg", "image/png", "image/webp"];

@@ -1,5 +1,5 @@
 /**
- * アプリケーション全体で使用する定数
+ * Application-wide constants
  */
 
 // Sui Network Configuration
@@ -14,6 +14,8 @@ export const TRANSFER_POLICY_ID =
 export const ADMIN_CAP_ID = process.env.NEXT_PUBLIC_ADMIN_CAP_ID || "";
 export const TRANSFER_POLICY_CAP_ID =
   process.env.NEXT_PUBLIC_TRANSFER_POLICY_CAP_ID || "";
+export const MOMENT_REGISTRY_ID =
+  process.env.NEXT_PUBLIC_MOMENT_REGISTRY_ID || "";
 export const COLLECTION_ID =
   process.env.NEXT_PUBLIC_COLLECTION_ID || "fight-moments-v1";
 
@@ -24,6 +26,9 @@ export const CLOCK_ID = "0x6"; // Shared Clock object
 export const WALRUS_RELAY_URL =
   process.env.NEXT_PUBLIC_WALRUS_RELAY_URL ||
   "https://publisher.walrus-testnet.walrus.space";
+export const WALRUS_AGGREGATOR_URL =
+  process.env.NEXT_PUBLIC_WALRUS_AGGREGATOR_URL ||
+  "https://aggregator.walrus-testnet.walrus.space";
 
 // Video Constraints
 export const MAX_VIDEO_DURATION_SECONDS = 30;
@@ -32,15 +37,38 @@ export const MAX_VIDEO_DURATION_SECONDS = 30;
 export const MIST_PER_SUI = 1_000_000_000;
 
 /**
- * MIST を SUI に変換
+ * Convert MIST to SUI
  */
 export function mistToSui(mist: number): number {
   return mist / MIST_PER_SUI;
 }
 
 /**
- * SUI を MIST に変換
+ * Convert SUI to MIST
  */
 export function suiToMist(sui: number): number {
   return Math.floor(sui * MIST_PER_SUI);
+}
+
+/**
+ * Generate Suiscan Explorer URL
+ */
+export function getSuiscanUrl(digest: string): string {
+  const network = SUI_NETWORK === "mainnet" ? "mainnet" : "testnet";
+  return `https://suiscan.xyz/${network}/tx/${digest}`;
+}
+
+/**
+ * Generate HTTPS URL from Walrus blob ID
+ */
+export function getWalrusHttpsUrl(blobId: string): string {
+  return `${WALRUS_AGGREGATOR_URL}/v1/blobs/${blobId}`;
+}
+
+/**
+ * Generate HTTPS URL from Walrus URI (walrus://xxxxx)
+ */
+export function convertWalrusUriToHttps(walrusUri: string): string {
+  const blobId = walrusUri.replace("walrus://", "");
+  return getWalrusHttpsUrl(blobId);
 }

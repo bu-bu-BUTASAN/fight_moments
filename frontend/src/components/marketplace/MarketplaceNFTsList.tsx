@@ -19,7 +19,9 @@ export function MarketplaceNFTsList({
   if (listings.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500 text-lg">現在、出品中のNFTはありません</p>
+        <p className="text-gray-500 text-lg">
+          No NFTs currently listed for sale
+        </p>
       </div>
     );
   }

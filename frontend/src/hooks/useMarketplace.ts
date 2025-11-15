@@ -1,18 +1,18 @@
 /**
- * Marketplace データフェッチ用カスタムフック
+ * Custom hook for fetching Marketplace data
  */
 
 import { useQuery } from "@tanstack/react-query";
 import { fetchMarketplaceListings } from "@/lib/sui/queries";
 
 /**
- * Marketplace に出品中の NFT を取得
+ * Fetch NFTs listed on the Marketplace
  */
 export function useMarketplaceListings() {
   return useQuery({
     queryKey: ["marketplaceListings"],
     queryFn: fetchMarketplaceListings,
-    staleTime: 30000, // 30秒間はキャッシュを使用
-    refetchInterval: 60000, // 1分ごとに自動更新
+    staleTime: 30000, // Use cache for 30 seconds
+    refetchInterval: 60000, // Auto-refresh every minute
   });
 }
