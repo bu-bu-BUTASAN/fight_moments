@@ -97,26 +97,38 @@
 
 ---
 
-## 📸 スクリーンショット
+## 🏆 Sui × ONE Championship ハッカソンへの適合性
 
-<!-- ※ Landing PageとMarketplaceのスクリーンショットは実装中です -->
-<!--
-### Landing Page
-![Landing Page](./docs/screenshots/01_landing.png)
--->
+### ONE Championshipへの革新的価値提案
 
-### Mint画面
-![Mint Screen](./docs/screenshots/02_mint.png)
+**本プロジェクトの最大の価値:ライブ配信視聴率の飛躍的向上**
 
-### NFT詳細（Walrus動画再生）
-![NFT Detail with Walrus Video](./docs/screenshots/03_nft_detail.png)
+格闘技興行において、**ライブ配信視聴者数**はビジネスの生命線です。
+Fight Moments NFTは、リアルタイムMintにより、この最重要KPIに直接インパクトを与えます。
 
-<!--
-### Marketplace
-![Marketplace](./docs/screenshots/04_marketplace.png)
--->
+| ONE Championshipの課題/価値 | Fight Moments NFTで実現 |
+|------------------------|------------------------|
+| 📺 **ライブ視聴率の最大化** 🔥 | **試合中にしかMintできない限定NFT**で「今見ないと損する」心理を創出 → PPV購入・視聴者数が劇的に向上 |
+| ⚡ **瞬間のドラマを資産化** | KO・一本などの決定的瞬間を永続化、ファンが所有可能 |
+| 🌏 **グローバルファンベース** | 世界中のファンが同時刻に同じNFTを奪い合う、国境を超えた一体感 |
+| 🎖️ **アスリート価値の最大化** | 選手の名シーンがファン資産として流通、選手のブランド価値向上 |
+| 📈 **新収益モデル構築** | 二次流通ロイヤリティで継続的収益、NFT保有者限定コンテンツ等の展開 |
 
-> 📸 **スクリーンショット撮影ガイド**: [`docs/screenshots/README.md`](./docs/screenshots/README.md)
+### Sui Networkの技術優位性
+
+| Sui特性 | 本プロジェクトでの活用 |
+|---------|----------------------|
+| ⚡ **高速トランザクション** | 試合中のリアルタイムMintに必須、Mint処理が即座に完了 |
+| 💰 **低コスト** | ライブ視聴中のファンが気軽に複数Mint可能 |
+| 🎨 **豊富なDisplay機能** | NFTメタデータの柔軟な表示 |
+| 🔧 **Move言語の安全性** | Supply制御やAdmin権限を厳密に実装 |
+
+### ハッカソンテーマ該当性
+
+- ✅ **DeFi/NFT活用**: NFT Marketplace + ロイヤリティ分配
+- ✅ **Infrastructure**: Walrus分散ストレージ統合
+- ✅ **Gaming/Entertainment**: スポーツエンタメ × ファンエンゲージメント
+- ✅ **Sui技術の最大活用**: Move 2024.beta + Display + Kiosk
 
 ---
 
@@ -303,41 +315,6 @@ display.add(b"image_url", b"https://aggregator.walrus-testnet.walrus.space/v1/{m
 
 ---
 
-## 🏆 Sui × ONE Championship ハッカソンへの適合性
-
-### ONE Championshipへの革新的価値提案
-
-**本プロジェクトの最大の価値：ライブ配信視聴率の飛躍的向上**
-
-格闘技興行において、**ライブ配信視聴者数**はビジネスの生命線です。
-Fight Moments NFTは、リアルタイムMintにより、この最重要KPIに直接インパクトを与えます。
-
-| ONE Championshipの課題/価値 | Fight Moments NFTで実現 |
-|------------------------|------------------------|
-| 📺 **ライブ視聴率の最大化** 🔥 | **試合中にしかMintできない限定NFT**で「今見ないと損する」心理を創出 → PPV購入・視聴者数が劇的に向上 |
-| ⚡ **瞬間のドラマを資産化** | KO・一本などの決定的瞬間を永続化、ファンが所有可能 |
-| 🌏 **グローバルファンベース** | 世界中のファンが同時刻に同じNFTを奪い合う、国境を超えた一体感 |
-| 🎖️ **アスリート価値の最大化** | 選手の名シーンがファン資産として流通、選手のブランド価値向上 |
-| 📈 **新収益モデル構築** | 二次流通ロイヤリティで継続的収益、NFT保有者限定コンテンツ等の展開 |
-
-### Sui Networkの技術優位性
-
-| Sui特性 | 本プロジェクトでの活用 |
-|---------|----------------------|
-| ⚡ **高速トランザクション** | 試合中のリアルタイムMintに必須、Mint処理が即座に完了 |
-| 💰 **低コスト** | ライブ視聴中のファンが気軽に複数Mint可能 |
-| 🎨 **豊富なDisplay機能** | NFTメタデータの柔軟な表示 |
-| 🔧 **Move言語の安全性** | Supply制御やAdmin権限を厳密に実装 |
-
-### ハッカソンテーマ該当性
-
-- ✅ **DeFi/NFT活用**: NFT Marketplace + ロイヤリティ分配
-- ✅ **Infrastructure**: Walrus分散ストレージ統合
-- ✅ **Gaming/Entertainment**: スポーツエンタメ × ファンエンゲージメント
-- ✅ **Sui技術の最大活用**: Move 2024.beta + Display + Kiosk
-
----
-
 ## 🎬 デモ動画撮影について
 
 > 📹 **撮影台本**: [`docs/DEMO_SCRIPT.md`](./docs/DEMO_SCRIPT.md)
@@ -372,6 +349,29 @@ fight_moments/
 │   └── DEMO_SCRIPT.md     # デモ動画台本
 └── README.md              # 本ドキュメント
 ```
+
+---
+
+## 📸 スクリーンショット
+
+<!-- ※ Landing PageとMarketplaceのスクリーンショットは実装中です -->
+<!--
+### Landing Page
+![Landing Page](./docs/screenshots/01_landing.png)
+-->
+
+### Mint画面
+![Mint Screen](./docs/screenshots/02_mint.png)
+
+### NFT詳細（Walrus動画再生）
+![NFT Detail with Walrus Video](./docs/screenshots/03_nft_detail.png)
+
+<!--
+### Marketplace
+![Marketplace](./docs/screenshots/04_marketplace.png)
+-->
+
+> 📸 **スクリーンショット撮影ガイド**: [`docs/screenshots/README.md`](./docs/screenshots/README.md)
 
 ---
 
@@ -485,26 +485,38 @@ This project fundamentally solves this by offering **limited-time NFTs mintable 
 
 ---
 
-## 📸 Screenshots
+## 🏆 Sui × ONE Championship Hackathon Fit
 
-<!-- ※ Landing Page and Marketplace screenshots are in progress -->
-<!--
-### Landing Page
-![Landing Page](./docs/screenshots/01_landing.png)
--->
+### Innovative Value Proposition for ONE Championship
 
-### Mint Screen
-![Mint Screen](./docs/screenshots/02_mint.png)
+**The Greatest Value of This Project: Dramatic Live Streaming Viewership Increase**
 
-### NFT Detail (Walrus Video Playback)
-![NFT Detail with Walrus Video](./docs/screenshots/03_nft_detail.png)
+For combat sports events, **live streaming viewer count** is the business lifeline.
+Fight Moments NFT directly impacts this crucial KPI through real-time minting.
 
-<!--
-### Marketplace
-![Marketplace](./docs/screenshots/04_marketplace.png)
--->
+| ONE Championship Challenge/Value | Realized by Fight Moments NFT |
+|---------------------------------|------------------------------|
+| 📺 **Maximize Live Viewership** 🔥 | **Limited NFTs mintable only during matches** create "watch now or lose out" psychology → Dramatic PPV purchases and viewer increase |
+| ⚡ **Monetize Dramatic Moments** | Perpetuate decisive moments like KOs and submissions; fans can own them |
+| 🌏 **Global Fan Base** | Worldwide fans compete for same NFTs simultaneously; cross-border unity |
+| 🎖️ **Maximize Athlete Value** | Athletes' iconic moments circulate as fan assets; enhances athlete brand value |
+| 📈 **Build New Revenue Model** | Continuous revenue through secondary market royalties; NFT holder-exclusive content, etc. |
 
-> 📸 **Screenshot Guide**: [`docs/screenshots/README.md`](./docs/screenshots/README.md)
+### Sui Network Technical Advantages
+
+| Sui Feature | Utilized in This Project |
+|-------------|-------------------------|
+| ⚡ **High-speed Transactions** | Essential for real-time minting during matches; instant mint processing |
+| 💰 **Low Cost** | Live viewers can casually mint multiple NFTs |
+| 🎨 **Rich Display Features** | Flexible NFT metadata display |
+| 🔧 **Move Language Safety** | Strict implementation of supply control and admin authorization |
+
+### Hackathon Theme Alignment
+
+- ✅ **DeFi/NFT Utilization**: NFT Marketplace + Royalty Distribution
+- ✅ **Infrastructure**: Walrus Distributed Storage Integration
+- ✅ **Gaming/Entertainment**: Sports Entertainment × Fan Engagement
+- ✅ **Maximum Sui Tech Utilization**: Move 2024.beta + Display + Kiosk
 
 ---
 
@@ -691,41 +703,6 @@ display.add(b"image_url", b"https://aggregator.walrus-testnet.walrus.space/v1/{m
 
 ---
 
-## 🏆 Sui × ONE Championship Hackathon Fit
-
-### Innovative Value Proposition for ONE Championship
-
-**The Greatest Value of This Project: Dramatic Live Streaming Viewership Increase**
-
-For combat sports events, **live streaming viewer count** is the business lifeline.
-Fight Moments NFT directly impacts this crucial KPI through real-time minting.
-
-| ONE Championship Challenge/Value | Realized by Fight Moments NFT |
-|---------------------------------|------------------------------|
-| 📺 **Maximize Live Viewership** 🔥 | **Limited NFTs mintable only during matches** create "watch now or lose out" psychology → Dramatic PPV purchases and viewer increase |
-| ⚡ **Monetize Dramatic Moments** | Perpetuate decisive moments like KOs and submissions; fans can own them |
-| 🌏 **Global Fan Base** | Worldwide fans compete for same NFTs simultaneously; cross-border unity |
-| 🎖️ **Maximize Athlete Value** | Athletes' iconic moments circulate as fan assets; enhances athlete brand value |
-| 📈 **Build New Revenue Model** | Continuous revenue through secondary market royalties; NFT holder-exclusive content, etc. |
-
-### Sui Network Technical Advantages
-
-| Sui Feature | Utilized in This Project |
-|-------------|-------------------------|
-| ⚡ **High-speed Transactions** | Essential for real-time minting during matches; instant mint processing |
-| 💰 **Low Cost** | Live viewers can casually mint multiple NFTs |
-| 🎨 **Rich Display Features** | Flexible NFT metadata display |
-| 🔧 **Move Language Safety** | Strict implementation of supply control and admin authorization |
-
-### Hackathon Theme Alignment
-
-- ✅ **DeFi/NFT Utilization**: NFT Marketplace + Royalty Distribution
-- ✅ **Infrastructure**: Walrus Distributed Storage Integration
-- ✅ **Gaming/Entertainment**: Sports Entertainment × Fan Engagement
-- ✅ **Maximum Sui Tech Utilization**: Move 2024.beta + Display + Kiosk
-
----
-
 ## 🎬 About Demo Video
 
 > 📹 **Recording Script**: [`docs/DEMO_SCRIPT.md`](./docs/DEMO_SCRIPT.md)
@@ -760,6 +737,29 @@ fight_moments/
 │   └── DEMO_SCRIPT.md     # Demo video script
 └── README.md              # This document
 ```
+
+---
+
+## 📸 Screenshots
+
+<!-- ※ Landing Page and Marketplace screenshots are in progress -->
+<!--
+### Landing Page
+![Landing Page](./docs/screenshots/01_landing.png)
+-->
+
+### Mint Screen
+![Mint Screen](./docs/screenshots/02_mint.png)
+
+### NFT Detail (Walrus Video Playback)
+![NFT Detail with Walrus Video](./docs/screenshots/03_nft_detail.png)
+
+<!--
+### Marketplace
+![Marketplace](./docs/screenshots/04_marketplace.png)
+-->
+
+> 📸 **Screenshot Guide**: [`docs/screenshots/README.md`](./docs/screenshots/README.md)
 
 ---
 
