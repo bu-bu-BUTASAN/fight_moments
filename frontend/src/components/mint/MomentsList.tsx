@@ -1,6 +1,8 @@
 "use client";
 
 import { useMintableMoments } from "@/hooks/useMintableMoments";
+// TODO: BCSデシリアライゼーション実装後、useMomentRegistryに切り替え
+// import { useMomentRegistry } from "@/hooks/useMomentRegistry";
 import { MomentCard } from "./MomentCard";
 
 interface MomentsListProps {
@@ -8,6 +10,8 @@ interface MomentsListProps {
 }
 
 export function MomentsList({ onMintSuccess }: MomentsListProps) {
+  // TODO: BCSデシリアライゼーション実装後、以下に切り替え
+  // const { data: moments, isLoading, error, refetch } = useMomentRegistry();
   const { data: moments, isLoading, error, refetch } = useMintableMoments();
 
   if (isLoading) {

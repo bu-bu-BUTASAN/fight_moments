@@ -83,12 +83,8 @@ export function MomentRegistrationForm({
       fighterB: metadata.fighterB,
       momentType: metadata.momentType,
       maxSupply: metadata.maxSupply,
-      videoWalrusUri: videoResult.uri,
-      thumbnailWalrusUri: thumbnailResult.uri,
-      blobId: videoResult.blobId,
       videoBlobId: videoResult.blobId,
       thumbnailBlobId: thumbnailResult.blobId,
-      contentHash: videoResult.hash,
     });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
