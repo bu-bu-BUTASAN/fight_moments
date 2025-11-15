@@ -16,15 +16,19 @@ export async function uploadToWalrus(
 
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await fetch(`${relayUrl}/v1/store`, {
+      const response = await fetch(`${relayUrl}/v1/blobs`, {
         method: "PUT",
-        body: formData,
+        body: file,
+        headers: {
+          "Content-Type": "application/octet-stream",
+        },
       });
 
       if (!response.ok) {
+        const errorBody = await response.text();
+        console.error(
+          `Walrus upload failed:\nStatus: ${response.status}\nURL: ${response.url}\nResponse: ${errorBody}`,
+        );
         throw new Error(
           `Walrus upload failed: ${response.status} ${response.statusText}`,
         );
@@ -64,5 +68,5 @@ export async function uploadToWalrus(
 export function getWalrusViewUrl(uri: string): string {
   // walrus://blob_id の形式から blob_id を抽出
   const blobId = uri.replace("walrus://", "");
-  return `${walrusConfig.relayUrl}/v1/${blobId}`;
+  return `${walrusConfig.relayUrl}/v1/blobs/${blobId}`;
 }
