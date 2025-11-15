@@ -29,11 +29,14 @@ prompt_input() {
 #   0 - Yes、1 - No
 prompt_yes_no() {
     local prompt="$1"
-    local default_value="${2,,}" # 小文字に変換
+    local default_value="$2"
     local input_value
     local prompt_suffix
 
-    case "$default_value" in
+    # デフォルトを小文字に変換（bash 3.2対応）
+    local default_value_lc="$(printf '%s' "$default_value" | tr '[:upper:]' '[:lower:]')"
+
+    case "$default_value_lc" in
         y|yes)
             prompt_suffix="(Y/n)"
             ;;
@@ -47,11 +50,11 @@ prompt_yes_no() {
 
     while true; do
         read -p "${prompt} ${prompt_suffix}: " input_value
-        input_value="${input_value,,}" # 小文字に変換
+        input_value="$(printf '%s' "$input_value" | tr '[:upper:]' '[:lower:]')"
 
         # デフォルト値の処理
-        if [[ -z "$input_value" ]] && [[ -n "$default_value" ]]; then
-            input_value="$default_value"
+        if [[ -z "$input_value" ]] && [[ -n "$default_value_lc" ]]; then
+            input_value="$default_value_lc"
         fi
 
         case "$input_value" in
@@ -151,19 +154,22 @@ prompt_menu() {
     local options=("$@")
     local choice
 
-    echo ""
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "  ${title}"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    {
+        echo ""
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "  ${title}"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-    for i in "${!options[@]}"; do
-        echo "$((i+1)). ${options[$i]}"
-    done
-    echo "0. 戻る/終了"
-    echo ""
+        for i in "${!options[@]}"; do
+            echo "$((i+1)). ${options[$i]}"
+        done
+        echo "0. 戻る/終了"
+        echo ""
+    } >&2
 
     while true; do
-        read -p "選択してください: " choice
+        printf "選択してください: " >&2
+        read -r choice
 
         # 改行やスペースをトリム
         choice=$(echo "$choice" | tr -d '[:space:]')
@@ -179,6 +185,6 @@ prompt_menu() {
             fi
         fi
 
-        echo "1 から ${#options[@]} の数値、または 0 を入力してください。"
+        printf "1 から %s の数値、または 0 を入力してください。\n" "${#options[@]}" >&2
     done
 }

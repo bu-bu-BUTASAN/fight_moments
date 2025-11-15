@@ -7,6 +7,9 @@ source "${SCRIPT_DIR}/lib/input.sh"
 source "${SCRIPT_DIR}/lib/network.sh"
 source "${SCRIPT_DIR}/lib/env_manager.sh"
 
+# 環境変数ファイルの管理者を初期化
+initialize_env_manager "$SCRIPT_DIR"
+
 # デプロイ前の確認
 pre_deploy_check() {
     log_section "デプロイ前確認"

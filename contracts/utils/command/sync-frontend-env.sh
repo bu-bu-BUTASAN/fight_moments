@@ -7,6 +7,9 @@ source "${SCRIPT_DIR}/lib/input.sh"
 source "${SCRIPT_DIR}/lib/network.sh"
 source "${SCRIPT_DIR}/lib/env_manager.sh"
 
+# 環境変数ファイルのパスを設定
+initialize_env_manager "$SCRIPT_DIR"
+
 # フロントエンドディレクトリのパス
 FRONTEND_DIR="$(cd "${SCRIPT_DIR}/../../frontend" && pwd)"
 FRONTEND_ENV="${FRONTEND_DIR}/.env"
