@@ -34,6 +34,8 @@ export interface MintableMoment {
   momentType: string;
   videoWalrusUri: string;
   thumbnailWalrusUri: string;
+  thumbnailBlobId: string;
+  videoBlobId: string;
   walrusHash: string;
   maxSupply: number;
   mintedCount: number;

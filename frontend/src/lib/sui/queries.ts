@@ -2,6 +2,7 @@
  * Sui RPC クエリ関数
  */
 
+import { Transaction } from "@mysten/sui/transactions";
 import type {
   FightMomentNFT,
   KioskListing,
@@ -11,7 +12,6 @@ import type {
 } from "@/types/contract";
 import { MOMENT_REGISTRY_ID, PACKAGE_ID } from "../constants";
 import { suiClient } from "./client";
-import { Transaction } from "@mysten/sui/transactions";
 
 /**
  * すべての MintableMoment オブジェクトを取得
@@ -60,6 +60,8 @@ export async function fetchMintableMoments(): Promise<MintableMoment[]> {
           momentType: fields.moment_type as string,
           videoWalrusUri: (media.video_uri as string) || "",
           thumbnailWalrusUri: (media.thumbnail_uri as string) || "",
+          thumbnailBlobId: (media.thumbnail_blob_id as string) || "",
+          videoBlobId: (media.video_blob_id as string) || "",
           walrusHash: (media.content_hash as string) || "",
           maxSupply: Number(fields.max_supply),
           mintedCount: Number(fields.current_supply || 0),
@@ -110,6 +112,8 @@ export async function fetchMintableMoment(
       momentType: fields.moment_type as string,
       videoWalrusUri: (media.video_uri as string) || "",
       thumbnailWalrusUri: (media.thumbnail_uri as string) || "",
+      thumbnailBlobId: (media.thumbnail_blob_id as string) || "",
+      videoBlobId: (media.video_blob_id as string) || "",
       walrusHash: (media.content_hash as string) || "",
       maxSupply: Number(fields.max_supply),
       mintedCount: Number(fields.current_supply || 0),
