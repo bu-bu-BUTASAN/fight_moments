@@ -46,6 +46,7 @@ cd contracts/utils
   コマンド選択 (現在: devnet)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 1. deploy - コントラクトをデプロイ
+2. sync-frontend-env - フロントエンド環境変数を同期
 9. ネットワーク変更
 0. 終了
 
@@ -111,6 +112,57 @@ cd contracts/utils
 ────────────────────────────────────────
 ```
 
+### sync-frontend-env - フロントエンド環境変数の同期
+
+契約環境変数（`.env.{network}`）をフロントエンド環境変数（`frontend/.env`）に同期します。
+
+#### 実行フロー
+
+1. **同期前確認**
+   - フロントエンドディレクトリの確認
+   - frontend/.env の存在確認
+   - 契約環境変数ファイルの確認
+
+2. **確認プロンプト**
+   - 同期内容の確認
+
+3. **バックアップ作成**
+   - frontend/.env のバックアップ（タイムスタンプ付き）
+
+4. **環境変数同期**
+   - 以下のマッピングで環境変数を更新:
+     - `NETWORK` → `NEXT_PUBLIC_SUI_NETWORK`
+     - `RPC_URL` → `NEXT_PUBLIC_SUI_RPC_URL`
+     - `PACKAGE_ID` → `NEXT_PUBLIC_PACKAGE_ID`
+     - `TRANSFER_POLICY_ID` → `NEXT_PUBLIC_TRANSFER_POLICY_ID`
+     - `ADMIN_CAP_ID` → `NEXT_PUBLIC_ADMIN_CAP_ID`
+
+5. **同期結果表示**
+   - 更新された環境変数の一覧表示
+
+#### 出力例
+
+```
+✅ フロントエンド .env を更新しました:
+  [更新] NEXT_PUBLIC_SUI_NETWORK=devnet
+  [更新] NEXT_PUBLIC_SUI_RPC_URL=https://fullnode.devnet.sui.io:443
+  [更新] NEXT_PUBLIC_PACKAGE_ID=0xabc123...
+  [更新] NEXT_PUBLIC_TRANSFER_POLICY_ID=0x456def...
+  [更新] NEXT_PUBLIC_ADMIN_CAP_ID=0xdef456...
+```
+
+#### 必要要件
+
+- **Python3**: 環境変数のマッピング処理に使用
+  - macOS: デフォルトでインストール済み
+  - Ubuntu: `sudo apt-get install python3`
+
+#### 使用タイミング
+
+- デプロイ後、フロントエンドに環境変数を反映したいとき
+- ネットワークを切り替えた後
+- 環境変数が更新された後
+
 ## 📁 ファイル構成
 
 ```
@@ -122,7 +174,8 @@ contracts/utils/
 ├── .env.testnet             # testnet環境変数（自動生成）
 ├── .gitignore               # Git除外設定
 ├── command/                  # コマンド実装
-│   └── deploy.sh            # デプロイコマンド
+│   ├── deploy.sh            # デプロイコマンド
+│   └── sync-frontend-env.sh # フロントエンド環境変数同期
 ├── lib/                      # 共通ライブラリ
 │   ├── logging.sh           # ログ出力
 │   ├── input.sh             # 入力処理

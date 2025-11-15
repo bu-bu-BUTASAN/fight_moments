@@ -110,6 +110,7 @@ command_menu() {
         log_section "コマンド選択 (現在: ${SELECTED_NETWORK})"
 
         echo "1. deploy - コントラクトをデプロイ"
+        echo "2. sync-frontend-env - フロントエンド環境変数を同期"
         echo "9. ネットワーク変更"
         echo "0. 終了"
         echo ""
@@ -120,6 +121,9 @@ command_menu() {
         case "$choice" in
             1)
                 execute_command "deploy"
+                ;;
+            2)
+                execute_command "sync-frontend-env"
                 ;;
             9)
                 select_network_menu
