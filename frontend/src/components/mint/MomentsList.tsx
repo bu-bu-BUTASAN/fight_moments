@@ -18,8 +18,8 @@ export function MomentsList({ onMintSuccess }: MomentsListProps) {
     return (
       <div className="flex justify-center items-center py-12">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600">Moments を読み込んでいます...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4" />
+          <p className="text-gray-400">Moments を読み込んでいます...</p>
         </div>
       </div>
     );
@@ -27,8 +27,8 @@ export function MomentsList({ onMintSuccess }: MomentsListProps) {
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-        <p className="text-red-600 mb-4">
+      <div className="bg-gray-800 border border-red-800 rounded-lg p-6 text-center">
+        <p className="text-red-400 mb-4">
           Moments の読み込みに失敗しました: {error.message}
         </p>
         <button
@@ -44,8 +44,8 @@ export function MomentsList({ onMintSuccess }: MomentsListProps) {
 
   if (!moments || moments.length === 0) {
     return (
-      <div className="bg-gray-50 border border-gray-200 rounded-lg p-12 text-center">
-        <p className="text-gray-600 text-lg">
+      <div className="bg-gray-800 border border-gray-700 rounded-lg p-12 text-center">
+        <p className="text-gray-400 text-lg">
           現在ミント可能な Moment はありません
         </p>
       </div>
@@ -60,20 +60,32 @@ export function MomentsList({ onMintSuccess }: MomentsListProps) {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">
-          ミント可能な Moments
-        </h2>
+      <div className="flex items-center justify-between mb-4">
         <button
           type="button"
           onClick={() => refetch()}
-          className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+          className="px-3 py-1.5 text-xs bg-gray-800 text-gray-300 rounded-md hover:bg-gray-700 border border-gray-700 flex items-center gap-1.5"
         >
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <title>Refresh</title>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            />
+          </svg>
           更新
         </button>
+        <p className="text-xs text-gray-400">全 {moments.length} 件</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex flex-col gap-4">
         {moments.map((moment) => (
           <MomentCard
             key={moment.id}
@@ -82,10 +94,6 @@ export function MomentsList({ onMintSuccess }: MomentsListProps) {
           />
         ))}
       </div>
-
-      <p className="text-sm text-gray-500 mt-6 text-center">
-        全 {moments.length} 件の Moment
-      </p>
     </div>
   );
 }
