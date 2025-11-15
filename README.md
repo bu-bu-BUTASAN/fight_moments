@@ -445,6 +445,7 @@ This project fundamentally solves this by offering **limited-time NFTs mintable 
 - **Advertising Value Increase**: Higher live viewer count → Higher ad rates
 - **Community Activation**: Foundation for engagement initiatives like NFT holder-exclusive events
 - **Athlete/Organizer Revenue**: Continuous revenue through secondary market royalties
+- **Direct Fighter Revenue**: Mint fees are shared between organizers and both fighters, becoming direct income for the fighters
 
 → ### **From "I'll watch the archive later" to "Must watch now or lose forever"**
 
@@ -455,6 +456,13 @@ This project fundamentally solves this by offering **limited-time NFTs mintable 
 - ✅ **Supply Management**: On-chain scarcity control (max_supply setting)
 - ✅ **Display Optimization**: Full Sui Explorer compatibility (HTTPS URL fixed)
 - ✅ **Admin Authorization**: Quality-assured registration flow via AdminCap
+
+### 🚀 Future Vision
+
+- 🥊 Legendary fights are recognized on-chain as historical digital assets, trading at scales comparable to fine art auctions
+- 🕶️ Deep AR/VR integration lets NFT holders "teleport" ringside to re-experience their owned moments in fully immersive environments
+- 🎫 Tickets, NFTs, and fan-club IDs are unified on-chain so that "attend live → own the moment → join the community" becomes a seamless flow
+- 🤝 Fighters, gyms, and promotions form DAOs where a portion of NFT revenue is automatically routed into funds that nurture the next generation of fighters
 
 ---
 
