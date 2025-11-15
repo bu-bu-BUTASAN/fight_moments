@@ -177,7 +177,7 @@ export function MomentRegistrationForm({
               handleMetadataChange("matchId", event.target.value)
             }
             placeholder="UFC300-001"
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
             required
           />
         </div>
@@ -198,7 +198,7 @@ export function MomentRegistrationForm({
                 handleMetadataChange("fighterA", event.target.value)
               }
               placeholder="Fighter Name"
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
               required
             />
           </div>
@@ -217,7 +217,7 @@ export function MomentRegistrationForm({
                 handleMetadataChange("fighterB", event.target.value)
               }
               placeholder="Fighter Name"
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
               required
             />
           </div>
@@ -237,7 +237,7 @@ export function MomentRegistrationForm({
               onChange={(event) =>
                 handleMetadataChange("momentType", event.target.value)
               }
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
             >
               <option value={MOMENT_TYPES.KO}>KO</option>
               <option value={MOMENT_TYPES.SUBMISSION}>Submission</option>
@@ -266,7 +266,7 @@ export function MomentRegistrationForm({
                 );
               }}
               min={1}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
               required
             />
           </div>
