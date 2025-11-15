@@ -99,12 +99,11 @@
 
 ## 📸 スクリーンショット
 
-<!-- スクリーンショットを撮影後、以下のコメントを外してください -->
-<!-- docs/screenshots/ に画像を配置済みの場合は、このセクションのコメントを外してください -->
-
+<!-- ※ Landing PageとMarketplaceのスクリーンショットは実装中です -->
 <!--
 ### Landing Page
 ![Landing Page](./docs/screenshots/01_landing.png)
+-->
 
 ### Mint画面
 ![Mint Screen](./docs/screenshots/02_mint.png)
@@ -112,6 +111,7 @@
 ### NFT詳細（Walrus動画再生）
 ![NFT Detail with Walrus Video](./docs/screenshots/03_nft_detail.png)
 
+<!--
 ### Marketplace
 ![Marketplace](./docs/screenshots/04_marketplace.png)
 -->
@@ -436,10 +436,10 @@ fight_moments/
 
 ### 🚧 Phase 2: Enhancement（実装中）
 
-- [ ] フロントエンドデプロイ（Vercel）
-- [ ] スクリーンショット撮影
-- [ ] デモ動画作成
-- [ ] UI/UXブラッシュアップ
+- [x] フロントエンドデプロイ（Cloudflare Pages） ✅ 完了
+- [x] スクリーンショット撮影（2/4枚完了、残りは実装中）
+- [x] デモ動画作成 ✅ 完了
+- [ ] UI/UXブラッシュアップ（実装中）
 
 ### 🔮 Phase 3: Future（構想）
 
@@ -593,12 +593,11 @@ This project fundamentally solves this by offering **limited-time NFTs mintable 
 
 ## 📸 Screenshots
 
-<!-- After taking screenshots, uncomment below -->
-<!-- If you've placed images in docs/screenshots/, uncomment this section -->
-
+<!-- ※ Landing Page and Marketplace screenshots are in progress -->
 <!--
 ### Landing Page
 ![Landing Page](./docs/screenshots/01_landing.png)
+-->
 
 ### Mint Screen
 ![Mint Screen](./docs/screenshots/02_mint.png)
@@ -606,6 +605,7 @@ This project fundamentally solves this by offering **limited-time NFTs mintable 
 ### NFT Detail (Walrus Video Playback)
 ![NFT Detail with Walrus Video](./docs/screenshots/03_nft_detail.png)
 
+<!--
 ### Marketplace
 ![Marketplace](./docs/screenshots/04_marketplace.png)
 -->
@@ -930,10 +930,10 @@ fight_moments/
 
 ### 🚧 Phase 2: Enhancement (In Progress)
 
-- [ ] Frontend deployment (Vercel)
-- [ ] Screenshot capture
-- [ ] Demo video creation
-- [ ] UI/UX refinement
+- [x] Frontend deployment (Cloudflare Pages) ✅ Completed
+- [x] Screenshot capture (2/4 completed, others in progress)
+- [x] Demo video creation ✅ Completed
+- [ ] UI/UX refinement (In progress)
 
 ### 🔮 Phase 3: Future (Planned)
 
