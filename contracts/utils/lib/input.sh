@@ -81,12 +81,18 @@ validate_number() {
         return 1
     fi
 
-    # 数値チェック（正の整数のみ）
-    if [[ "$value" =~ ^[0-9]+$ ]]; then
-        return 0
-    else
-        return 1
-    fi
+    # 数値以外の文字が含まれていないかチェック
+    # ASCIIの数字のみを許可
+    case "$value" in
+        ''|*[!0-9]*)
+            # 空文字または数字以外が含まれる
+            return 1
+            ;;
+        *)
+            # 数字のみ
+            return 0
+            ;;
+    esac
 }
 
 # Suiアドレスの検証
@@ -159,14 +165,20 @@ prompt_menu() {
     while true; do
         read -p "選択してください: " choice
 
+        # 改行やスペースをトリム
+        choice=$(echo "$choice" | tr -d '[:space:]')
+
         if [[ "$choice" == "0" ]]; then
             echo "0"
             return 0
-        elif validate_number "$choice" && [[ "$choice" -ge 1 ]] && [[ "$choice" -le "${#options[@]}" ]]; then
-            echo "$choice"
-            return 0
-        else
-            echo "1 から ${#options[@]} の数値、または 0 を入力してください。"
+        elif validate_number "$choice" 2>/dev/null; then
+            # 数値として有効な場合のみ、範囲チェック
+            if [[ "$choice" -ge 1 ]] 2>/dev/null && [[ "$choice" -le "${#options[@]}" ]] 2>/dev/null; then
+                echo "$choice"
+                return 0
+            fi
         fi
+
+        echo "1 から ${#options[@]} の数値、または 0 を入力してください。"
     done
 }
