@@ -85,6 +85,7 @@ export function MomentRegistrationForm({
       maxSupply: metadata.maxSupply,
       videoBlobId: videoResult.blobId,
       thumbnailBlobId: thumbnailResult.blobId,
+      contentHash: videoResult.hash, // Walrusから返されたhashを使用
     });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {

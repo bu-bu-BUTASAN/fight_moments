@@ -21,9 +21,15 @@ export function buildRegisterMomentTx(params: {
   momentType: string;
   videoBlobId: string;
   thumbnailBlobId: string;
+  contentHash: string;
   maxSupply: number;
 }) {
   const tx = new Transaction();
+
+  // Walrus URIを生成
+  const videoUri = `walrus://${params.videoBlobId}`;
+  const thumbnailUri = `walrus://${params.thumbnailBlobId}`;
+  const blobId = params.videoBlobId; // メインのblob IDとしてvideoを使用
 
   tx.moveCall({
     target: `${PACKAGE_ID}::admin::register_moment`,
@@ -34,8 +40,12 @@ export function buildRegisterMomentTx(params: {
       tx.pure.string(params.fighterA), // fighter_a: String
       tx.pure.string(params.fighterB), // fighter_b: String
       tx.pure.string(params.momentType), // moment_type: String
+      tx.pure.string(videoUri), // video_uri: String
+      tx.pure.string(thumbnailUri), // thumbnail_uri: String
+      tx.pure.string(blobId), // blob_id: String
       tx.pure.string(params.videoBlobId), // video_blob_id: String
       tx.pure.string(params.thumbnailBlobId), // thumbnail_blob_id: String
+      tx.pure.string(params.contentHash), // content_hash: String
       tx.pure.u64(params.maxSupply), // max_supply: u64
     ],
   });
