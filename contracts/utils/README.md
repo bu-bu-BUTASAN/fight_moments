@@ -167,8 +167,7 @@ cd contracts/utils
 
 ```
 contracts/utils/
-├── cli.sh                    # エントリーポイント
-├── main.sh                   # メインロジック
+├── cli.sh                    # メインスクリプト
 ├── .env.template             # 環境変数テンプレート
 ├── .env.devnet              # devnet環境変数（自動生成）
 ├── .env.testnet             # testnet環境変数（自動生成）
