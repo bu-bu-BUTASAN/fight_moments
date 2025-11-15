@@ -15,6 +15,7 @@ use sui::package;
 use sui::display;
 use sui::transfer_policy;
 use fight_moments::types::{Self, FightMomentNFT};
+use fight_moments::registry;
 
 // ===== One-time Witness =====
 
@@ -24,7 +25,7 @@ public struct FIGHT_MOMENTS has drop {}
 // ===== Initialization =====
 
 /// Initialize the contract
-/// Creates AdminCap, Publisher, and TransferPolicy
+/// Creates AdminCap, Publisher, TransferPolicy, and MomentRegistry
 #[allow(lint(share_owned))]
 fun init(otw: FIGHT_MOMENTS, ctx: &mut TxContext) {
     // Create and transfer AdminCap to deployer
@@ -36,12 +37,16 @@ fun init(otw: FIGHT_MOMENTS, ctx: &mut TxContext) {
 
     // Create TransferPolicy for future royalty enforcement
     let (policy, policy_cap) = transfer_policy::new<FightMomentNFT>(&publisher, ctx);
-    
+
     // Share the transfer policy (required for Kiosk)
     transfer::public_share_object(policy);
-    
+
     // Transfer policy cap to deployer
     transfer::public_transfer(policy_cap, tx_context::sender(ctx));
+
+    // Create and share MomentRegistry for managing mintable moments
+    let moment_registry = registry::create_registry(ctx);
+    registry::share_registry(moment_registry);
 
     // Setup Object Display
     setup_display(&publisher, ctx);

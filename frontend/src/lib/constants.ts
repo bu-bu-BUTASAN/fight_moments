@@ -14,6 +14,8 @@ export const TRANSFER_POLICY_ID =
 export const ADMIN_CAP_ID = process.env.NEXT_PUBLIC_ADMIN_CAP_ID || "";
 export const TRANSFER_POLICY_CAP_ID =
   process.env.NEXT_PUBLIC_TRANSFER_POLICY_CAP_ID || "";
+export const MOMENT_REGISTRY_ID =
+  process.env.NEXT_PUBLIC_MOMENT_REGISTRY_ID || "";
 export const COLLECTION_ID =
   process.env.NEXT_PUBLIC_COLLECTION_ID || "fight-moments-v1";
 
@@ -54,4 +56,19 @@ export function suiToMist(sui: number): number {
 export function getSuiscanUrl(digest: string): string {
   const network = SUI_NETWORK === "mainnet" ? "mainnet" : "testnet";
   return `https://suiscan.xyz/${network}/tx/${digest}`;
+}
+
+/**
+ * Walrus blob ID から HTTPS URL を生成
+ */
+export function getWalrusHttpsUrl(blobId: string): string {
+  return `${WALRUS_AGGREGATOR_URL}/v1/blobs/${blobId}`;
+}
+
+/**
+ * Walrus URI (walrus://xxxxx) から HTTPS URL を生成
+ */
+export function convertWalrusUriToHttps(walrusUri: string): string {
+  const blobId = walrusUri.replace("walrus://", "");
+  return getWalrusHttpsUrl(blobId);
 }
