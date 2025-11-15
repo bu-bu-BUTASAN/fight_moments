@@ -24,6 +24,9 @@ export const CLOCK_ID = "0x6"; // Shared Clock object
 export const WALRUS_RELAY_URL =
   process.env.NEXT_PUBLIC_WALRUS_RELAY_URL ||
   "https://publisher.walrus-testnet.walrus.space";
+export const WALRUS_AGGREGATOR_URL =
+  process.env.NEXT_PUBLIC_WALRUS_AGGREGATOR_URL ||
+  "https://aggregator.walrus-testnet.walrus.space";
 
 // Video Constraints
 export const MAX_VIDEO_DURATION_SECONDS = 30;
