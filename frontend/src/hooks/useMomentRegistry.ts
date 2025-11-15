@@ -1,5 +1,5 @@
 /**
- * MomentRegistry データフェッチ用カスタムフック
+ * Custom hook for fetching MomentRegistry data
  */
 
 import { useQuery } from "@tanstack/react-query";
@@ -9,20 +9,20 @@ import {
 } from "@/lib/sui/queries";
 
 /**
- * MomentRegistry からすべてのアクティブな Moment を取得
- * devInspect を使用してガス消費なしで取得
+ * Fetch all active Moments from MomentRegistry
+ * Uses devInspect to fetch without consuming gas
  */
 export function useMomentRegistry() {
   return useQuery({
     queryKey: ["momentRegistry"],
     queryFn: fetchMomentsFromRegistry,
-    staleTime: 30000, // 30秒間はキャッシュを使用
-    refetchInterval: 60000, // 1分ごとに自動更新
+    staleTime: 30000, // Use cache for 30 seconds
+    refetchInterval: 60000, // Auto-refresh every minute
   });
 }
 
 /**
- * MomentRegistry から特定の Moment を取得
+ * Fetch a specific Moment from MomentRegistry
  */
 export function useMomentFromRegistry(momentId: string | null) {
   return useQuery({
@@ -33,7 +33,7 @@ export function useMomentFromRegistry(momentId: string | null) {
       }
       return fetchMomentFromRegistry(momentId);
     },
-    enabled: !!momentId, // momentId がある場合のみクエリを実行
+    enabled: !!momentId, // Execute query only when momentId exists
     staleTime: 30000,
   });
 }

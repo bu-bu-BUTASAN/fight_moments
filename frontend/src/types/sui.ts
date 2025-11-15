@@ -1,16 +1,16 @@
 /**
- * Sui RPC レスポンスの型定義
+ * Type definitions for Sui RPC responses
  */
 
 import type { SuiObjectResponse } from "@mysten/sui/client";
 
 /**
- * Sui Object の汎用型
+ * Generic type for Sui Objects
  */
 export type { SuiObjectResponse };
 
 /**
- * Kiosk Owner Cap の型
+ * Type for Kiosk Owner Cap
  */
 export interface KioskOwnerCap {
   id: string;

@@ -26,15 +26,13 @@ export default function MarketplacePage() {
 
   const handlePurchaseSuccess = (digest: string) => {
     setSuccessDigest(digest);
-    setSuccessMessage(
-      `NFTを購入しました! トランザクション: ${digest.slice(0, 8)}...`,
-    );
-    // 5秒後にメッセージを消す
+    setSuccessMessage(`NFT purchased! Transaction: ${digest.slice(0, 8)}...`);
+    // Dismiss message after 5 seconds
     setTimeout(() => {
       setSuccessMessage(null);
       setSuccessDigest(null);
     }, 5000);
-    // リストを再取得
+    // Refetch listings
     refetch();
   };
 
@@ -43,17 +41,17 @@ export default function MarketplacePage() {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-md mx-auto bg-yellow-50 border border-yellow-200 rounded-lg p-6">
           <h2 className="text-xl font-bold text-yellow-800 mb-2">
-            ウォレット接続が必要です
+            Wallet Connection Required
           </h2>
           <p className="text-yellow-700">
-            Marketplaceを利用するには、ウォレットを接続してください。
+            Please connect your wallet to use the Marketplace.
           </p>
         </div>
       </div>
     );
   }
 
-  // userKioskCaps の最初の要素を使用（簡易実装）
+  // Use first element of userKioskCaps (simple implementation)
   const userKioskId =
     userKioskCaps && userKioskCaps.length > 0 ? userKioskCaps[0].kioskId : null;
   const userKioskCapId =
@@ -63,10 +61,12 @@ export default function MarketplacePage() {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Marketplace</h1>
-        <p className="text-gray-600">出品中のFight Moments NFTを購入できます</p>
+        <p className="text-gray-600">
+          Browse and purchase listed Fight Moments NFTs
+        </p>
       </div>
 
-      {/* 成功メッセージ */}
+      {/* Success Message */}
       {successMessage && successDigest && (
         <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
           <p className="text-green-800">{successMessage}</p>
@@ -76,26 +76,26 @@ export default function MarketplacePage() {
             rel="noopener noreferrer"
             className="text-green-600 hover:text-green-700 text-sm underline"
           >
-            Suiscanで確認 →
+            View on Suiscan →
           </Link>
         </div>
       )}
 
-      {/* ローディング */}
+      {/* Loading */}
       {isLoading && (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">読み込み中...</p>
+          <p className="text-gray-500 text-lg">Loading...</p>
         </div>
       )}
 
-      {/* エラー */}
+      {/* Error */}
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-          <p className="text-red-800">エラーが発生しました: {error.message}</p>
+          <p className="text-red-800">An error occurred: {error.message}</p>
         </div>
       )}
 
-      {/* NFT リスト */}
+      {/* NFT List */}
       {listings && (
         <MarketplaceNFTsList
           listings={listings}

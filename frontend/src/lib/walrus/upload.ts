@@ -1,5 +1,5 @@
 /**
- * Walrus Upload Relay 経由のファイルアップロード
+ * File upload via Walrus Upload Relay
  */
 
 import { WALRUS_AGGREGATOR_URL } from "@/lib/constants";
@@ -7,7 +7,7 @@ import type { WalrusUploadResult } from "@/types/walrus";
 import { walrusConfig } from "./client";
 
 /**
- * ファイルを Walrus にアップロードする
+ * Upload file to Walrus
  */
 export async function uploadToWalrus(
   file: File,
@@ -37,7 +37,7 @@ export async function uploadToWalrus(
 
       const result = await response.json();
 
-      // Walrus レスポンスの構造に合わせて URI を構築
+      // Build URI according to Walrus response structure
       const blobId =
         result.newlyCreated?.blobObject?.blobId ||
         result.alreadyCertified?.blobId;
@@ -49,13 +49,13 @@ export async function uploadToWalrus(
       return {
         uri: `walrus://${blobId}`,
         blobId: blobId,
-        hash: blobId, // Walrus では blobId がハッシュとして機能
+        hash: blobId, // In Walrus, blobId functions as hash
       };
     } catch (error) {
       if (attempt === maxRetries - 1) {
         throw error;
       }
-      // リトライ前に待機
+      // Wait before retry
       await new Promise((resolve) => setTimeout(resolve, retryDelay));
     }
   }
@@ -64,10 +64,10 @@ export async function uploadToWalrus(
 }
 
 /**
- * Walrus URI から閲覧用 URL を生成
+ * Generate view URL from Walrus URI
  */
 export function getWalrusViewUrl(uri: string): string {
-  // walrus://blob_id の形式から blob_id を抽出
+  // Extract blob_id from walrus://blob_id format
   const blobId = uri.replace("walrus://", "");
   return `${WALRUS_AGGREGATOR_URL}/v1/blobs/${blobId}`;
 }

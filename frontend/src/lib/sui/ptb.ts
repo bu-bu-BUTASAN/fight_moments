@@ -1,5 +1,5 @@
 /**
- * Programmable Transaction Block (PTB) ビルダーユーティリティ
+ * Programmable Transaction Block (PTB) builder utilities
  */
 
 import { Transaction } from "@mysten/sui/transactions";
@@ -11,7 +11,7 @@ import {
 } from "../constants";
 
 /**
- * Moment 登録用の PTB を構築
+ * Build PTB for Moment registration
  */
 export function buildRegisterMomentTx(params: {
   adminCapId: string;
@@ -26,10 +26,10 @@ export function buildRegisterMomentTx(params: {
 }) {
   const tx = new Transaction();
 
-  // Walrus URIを生成
+  // Generate Walrus URIs
   const videoUri = `walrus://${params.videoBlobId}`;
   const thumbnailUri = `walrus://${params.thumbnailBlobId}`;
-  const blobId = params.videoBlobId; // メインのblob IDとしてvideoを使用
+  const blobId = params.videoBlobId; // Use video as main blob ID
 
   tx.moveCall({
     target: `${PACKAGE_ID}::admin::register_moment`,
@@ -54,7 +54,7 @@ export function buildRegisterMomentTx(params: {
 }
 
 /**
- * 初めてのユーザー向け: Kiosk作成 + Mint の PTB を構築
+ * Build PTB for first-time users: Create Kiosk + Mint
  */
 export function buildCreateKioskAndMintTx(params: { momentId: string }) {
   const tx = new Transaction();
@@ -73,7 +73,7 @@ export function buildCreateKioskAndMintTx(params: { momentId: string }) {
 }
 
 /**
- * 既存Kiosk所有者向け: Mint & Lock の PTB を構築
+ * Build PTB for existing Kiosk owners: Mint & Lock
  */
 export function buildMintAndLockTx(params: {
   momentId: string;
@@ -98,7 +98,7 @@ export function buildMintAndLockTx(params: {
 }
 
 /**
- * Kiosk 内の NFT を出品する PTB を構築
+ * Build PTB for listing NFT in Kiosk
  */
 export function buildListNFTTx(params: {
   kioskId: string;
@@ -123,7 +123,7 @@ export function buildListNFTTx(params: {
 }
 
 /**
- * Kiosk から NFT の出品を取り消す PTB を構築
+ * Build PTB for delisting NFT from Kiosk
  */
 export function buildDelistNFTTx(params: {
   kioskId: string;
@@ -146,8 +146,8 @@ export function buildDelistNFTTx(params: {
 }
 
 /**
- * Kiosk から NFT を購入して自分の Kiosk にロックする PTB を構築
- * (既存 Kiosk 所有者向け)
+ * Build PTB for purchasing NFT from Kiosk and locking to own Kiosk
+ * (For existing Kiosk owners)
  */
 export function buildPurchaseAndLockTx(params: {
   sellerKioskId: string;
@@ -158,10 +158,10 @@ export function buildPurchaseAndLockTx(params: {
 }) {
   const tx = new Transaction();
 
-  // 支払い用の SUI コインを分割
+  // Split SUI coin for payment
   const [paymentCoin] = tx.splitCoins(tx.gas, [tx.pure.u64(params.price)]);
 
-  // 販売者の Kiosk から購入
+  // Purchase from seller's Kiosk
   const [nft, transferRequest] = tx.moveCall({
     target: "0x2::kiosk::purchase",
     typeArguments: [`${PACKAGE_ID}::types::FightMomentNFT`],
@@ -172,7 +172,7 @@ export function buildPurchaseAndLockTx(params: {
     ],
   });
 
-  // 購入者の Kiosk にロック
+  // Lock to buyer's Kiosk
   tx.moveCall({
     target: "0x2::kiosk::lock",
     typeArguments: [`${PACKAGE_ID}::types::FightMomentNFT`],
@@ -184,7 +184,7 @@ export function buildPurchaseAndLockTx(params: {
     ],
   });
 
-  // TransferRequest を確認
+  // Confirm TransferRequest
   tx.moveCall({
     target: "0x2::transfer_policy::confirm_request",
     typeArguments: [`${PACKAGE_ID}::types::FightMomentNFT`],
@@ -198,8 +198,8 @@ export function buildPurchaseAndLockTx(params: {
 }
 
 /**
- * Kiosk から NFT を購入して新規 Kiosk を作成してロックする PTB を構築
- * (初めてのユーザー向け)
+ * Build PTB for purchasing NFT from Kiosk and locking to new Kiosk
+ * (For first-time users)
  */
 export function buildPurchaseAndLockToNewKioskTx(params: {
   sellerKioskId: string;
@@ -209,10 +209,10 @@ export function buildPurchaseAndLockToNewKioskTx(params: {
 }) {
   const tx = new Transaction();
 
-  // 支払い用の SUI コインを分割
+  // Split SUI coin for payment
   const [paymentCoin] = tx.splitCoins(tx.gas, [tx.pure.u64(params.price)]);
 
-  // 販売者の Kiosk から購入
+  // Purchase from seller's Kiosk
   const [nft, transferRequest] = tx.moveCall({
     target: "0x2::kiosk::purchase",
     typeArguments: [`${PACKAGE_ID}::types::FightMomentNFT`],
@@ -223,13 +223,13 @@ export function buildPurchaseAndLockToNewKioskTx(params: {
     ],
   });
 
-  // 新規 Kiosk を作成
+  // Create new Kiosk
   const [kiosk, kioskCap] = tx.moveCall({
     target: "0x2::kiosk::new",
     arguments: [],
   });
 
-  // 新規 Kiosk にロック
+  // Lock to new Kiosk
   tx.moveCall({
     target: "0x2::kiosk::lock",
     typeArguments: [`${PACKAGE_ID}::types::FightMomentNFT`],
@@ -241,7 +241,7 @@ export function buildPurchaseAndLockToNewKioskTx(params: {
     ],
   });
 
-  // TransferRequest を確認
+  // Confirm TransferRequest
   tx.moveCall({
     target: "0x2::transfer_policy::confirm_request",
     typeArguments: [`${PACKAGE_ID}::types::FightMomentNFT`],
@@ -251,14 +251,14 @@ export function buildPurchaseAndLockToNewKioskTx(params: {
     ],
   });
 
-  // Kiosk を共有オブジェクトとして公開
+  // Publish Kiosk as shared object
   tx.moveCall({
     target: "0x2::transfer::public_share_object",
     typeArguments: ["0x2::kiosk::Kiosk"],
     arguments: [kiosk],
   });
 
-  // KioskOwnerCap を送信者に転送
+  // Transfer KioskOwnerCap to sender
   tx.transferObjects([kioskCap], tx.pure.address(params.buyerAddress));
 
   return tx;

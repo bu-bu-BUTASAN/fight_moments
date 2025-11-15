@@ -8,7 +8,7 @@ export function Navigation() {
   const pathname = usePathname();
 
   const navItems = [
-    { href: "/", label: "ホーム" },
+    { href: "/", label: "Home" },
     { href: "/mint", label: "Mint" },
     { href: "/marketplace", label: "Marketplace" },
     { href: "/mynfts", label: "My NFTs" },
@@ -19,7 +19,7 @@ export function Navigation() {
     <nav className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          {/* ロゴとナビゲーション */}
+          {/* Logo and navigation */}
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="text-xl font-bold text-purple-600">
@@ -46,13 +46,13 @@ export function Navigation() {
             </div>
           </div>
 
-          {/* ウォレット接続ボタン */}
+          {/* Wallet connect button */}
           <div className="flex items-center">
             <ConnectButton />
           </div>
         </div>
 
-        {/* モバイルメニュー */}
+        {/* Mobile menu */}
         <div className="sm:hidden pb-3 space-y-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href;

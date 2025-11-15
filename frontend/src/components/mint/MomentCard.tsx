@@ -66,21 +66,19 @@ export function MomentCard({ moment, onMintSuccess }: MomentCardProps) {
     } catch (err) {
       console.error("Failed to build transaction:", err);
       setError(
-        err instanceof Error
-          ? err.message
-          : "トランザクションの構築に失敗しました",
+        err instanceof Error ? err.message : "Failed to build transaction",
       );
       setIsMinting(false);
     }
   };
 
-  // ダミーのMint終了時刻(現在時刻から10分後)
+  // Dummy mint end time (10 minutes from now)
   const mintEndTime = Date.now() + 10 * 60 * 1000;
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all hover:border-blue-300">
       <div className="flex gap-3 p-3">
-        {/* サムネイル - コンパクト */}
+        {/* Thumbnail - Compact */}
         <div className="relative w-24 h-24 flex-shrink-0 bg-gray-100 rounded overflow-hidden">
           <Image
             src={thumbnailSrc}
@@ -98,7 +96,7 @@ export function MomentCard({ moment, onMintSuccess }: MomentCardProps) {
           )}
         </div>
 
-        {/* 詳細 */}
+        {/* Details */}
         <div className="flex-1 min-w-0">
           <div className="mb-2">
             <h3 className="text-sm font-bold text-gray-900 truncate">
@@ -120,14 +118,14 @@ export function MomentCard({ moment, onMintSuccess }: MomentCardProps) {
             <CountdownTimer endTime={mintEndTime} />
           </div>
 
-          {/* エラー表示 */}
+          {/* Error display */}
           {error && (
             <div className="mb-2 p-1.5 bg-red-50 border border-red-200 rounded">
               <p className="text-xs text-red-600">{error}</p>
             </div>
           )}
 
-          {/* Mintボタン */}
+          {/* Mint button */}
           <button
             type="button"
             onClick={handleMint}

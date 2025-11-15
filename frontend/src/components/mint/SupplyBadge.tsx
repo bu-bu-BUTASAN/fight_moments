@@ -44,7 +44,7 @@ export function SupplyBadge({ remaining, total }: SupplyBadgeProps) {
     >
       {getIcon()}
       <span>
-        残り {remaining}/{total}
+        {remaining}/{total} left
       </span>
       {percentage <= 20 && <span className="ml-1 animate-pulse">🔥</span>}
     </div>

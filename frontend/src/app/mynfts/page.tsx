@@ -11,7 +11,7 @@ export default function MyNFTsPage() {
 
   const handleListSuccess = (digest: string) => {
     setSuccessDigest(digest);
-    // 5秒後に成功メッセージを自動で消す
+    // Auto-dismiss success message after 5 seconds
     setTimeout(() => {
       setSuccessDigest(null);
     }, 5000);
@@ -22,7 +22,7 @@ export default function MyNFTsPage() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-4">My NFTs</h1>
-          <p className="text-gray-400">ウォレットを接続してください</p>
+          <p className="text-gray-400">Please connect your wallet</p>
         </div>
       </div>
     );
@@ -33,10 +33,10 @@ export default function MyNFTsPage() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">🏆 My NFTs</h1>
-          <p className="text-gray-400">あなたが所有する Fight Moments NFT</p>
+          <p className="text-gray-400">Your Fight Moments NFT collection</p>
         </div>
 
-        {/* 成功メッセージ */}
+        {/* Success Message */}
         {successDigest && (
           <div className="mb-6 p-4 bg-gray-900 border border-red-500 rounded-lg shadow-lg">
             <div className="flex items-start">
@@ -56,7 +56,7 @@ export default function MyNFTsPage() {
               </div>
               <div className="ml-3 flex-1">
                 <h3 className="text-sm font-medium text-white">
-                  NFTの出品が成功しました！
+                  NFT listed successfully!
                 </h3>
                 <p className="text-xs text-gray-400 mt-1 break-all">
                   Transaction: {successDigest.slice(0, 20)}...
@@ -67,24 +67,24 @@ export default function MyNFTsPage() {
                   rel="noopener noreferrer"
                   className="text-xs text-red-400 hover:text-red-300 underline mt-1 inline-block"
                 >
-                  Suiscanで確認 →
+                  View on Suiscan →
                 </a>
               </div>
             </div>
           </div>
         )}
 
-        {/* NFTs リスト */}
+        {/* NFTs List */}
         <NFTsList
           userAddress={currentAccount.address}
           onListSuccess={handleListSuccess}
         />
 
-        {/* ウォレット情報 */}
+        {/* Wallet Info */}
         <div className="mt-8 pt-6 border-t border-gray-800">
           <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-sm">
             <h3 className="text-sm font-medium text-gray-400 mb-2">
-              接続中のウォレット
+              Connected Wallet
             </h3>
             <p className="text-xs text-gray-500 font-mono break-all">
               {currentAccount.address}

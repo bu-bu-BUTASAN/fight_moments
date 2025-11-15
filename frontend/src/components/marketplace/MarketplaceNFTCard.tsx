@@ -43,7 +43,7 @@ export function MarketplaceNFTCard({
 
   const handlePurchase = () => {
     if (!currentAccount) {
-      setError("ウォレットが接続されていません");
+      setError("Wallet is not connected");
       return;
     }
 
@@ -51,7 +51,7 @@ export function MarketplaceNFTCard({
     setError(null);
 
     try {
-      // ユーザーが既存の Kiosk を持っているかチェック
+      // Check if user has an existing Kiosk
       const tx =
         userKioskId && userKioskCapId
           ? buildPurchaseAndLockTx({
@@ -88,9 +88,7 @@ export function MarketplaceNFTCard({
     } catch (err) {
       console.error("Failed to build transaction:", err);
       setError(
-        err instanceof Error
-          ? err.message
-          : "トランザクションの構築に失敗しました",
+        err instanceof Error ? err.message : "Failed to build transaction",
       );
       setIsPurchasing(false);
     }
@@ -100,7 +98,7 @@ export function MarketplaceNFTCard({
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      {/* サムネイル */}
+      {/* Thumbnail */}
       <div className="relative aspect-video bg-gray-100">
         <Image
           src={thumbnailSrc}
@@ -118,7 +116,7 @@ export function MarketplaceNFTCard({
         </div>
       </div>
 
-      {/* 詳細 */}
+      {/* Details */}
       <div className="p-4">
         <div className="mb-3">
           <h3 className="text-lg font-bold text-gray-900">
@@ -136,27 +134,27 @@ export function MarketplaceNFTCard({
           </span>
         </div>
 
-        {/* 価格 */}
+        {/* Price */}
         <div className="mb-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">価格</span>
+            <span className="text-sm text-gray-600">Price</span>
             <span className="text-xl font-bold text-gray-900">
               {priceInSui.toFixed(2)} SUI
             </span>
           </div>
         </div>
 
-        {/* エラー表示 */}
+        {/* Error display */}
         {error && <p className="text-xs text-red-600 mb-2">{error}</p>}
 
-        {/* 購入ボタン */}
+        {/* Purchase button */}
         <button
           type="button"
           onClick={handlePurchase}
           disabled={isPurchasing}
           className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
-          {isPurchasing ? "購入中..." : "購入する"}
+          {isPurchasing ? "Purchasing..." : "Purchase"}
         </button>
       </div>
     </div>

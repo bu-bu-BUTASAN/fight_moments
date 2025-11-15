@@ -1,5 +1,5 @@
 /**
- * アプリケーション全体で使用する定数
+ * Application-wide constants
  */
 
 // Sui Network Configuration
@@ -37,21 +37,21 @@ export const MAX_VIDEO_DURATION_SECONDS = 30;
 export const MIST_PER_SUI = 1_000_000_000;
 
 /**
- * MIST を SUI に変換
+ * Convert MIST to SUI
  */
 export function mistToSui(mist: number): number {
   return mist / MIST_PER_SUI;
 }
 
 /**
- * SUI を MIST に変換
+ * Convert SUI to MIST
  */
 export function suiToMist(sui: number): number {
   return Math.floor(sui * MIST_PER_SUI);
 }
 
 /**
- * Suiscan Explorer の URL を生成
+ * Generate Suiscan Explorer URL
  */
 export function getSuiscanUrl(digest: string): string {
   const network = SUI_NETWORK === "mainnet" ? "mainnet" : "testnet";
@@ -59,14 +59,14 @@ export function getSuiscanUrl(digest: string): string {
 }
 
 /**
- * Walrus blob ID から HTTPS URL を生成
+ * Generate HTTPS URL from Walrus blob ID
  */
 export function getWalrusHttpsUrl(blobId: string): string {
   return `${WALRUS_AGGREGATOR_URL}/v1/blobs/${blobId}`;
 }
 
 /**
- * Walrus URI (walrus://xxxxx) から HTTPS URL を生成
+ * Generate HTTPS URL from Walrus URI (walrus://xxxxx)
  */
 export function convertWalrusUriToHttps(walrusUri: string): string {
   const blobId = walrusUri.replace("walrus://", "");

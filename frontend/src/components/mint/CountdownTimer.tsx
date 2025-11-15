@@ -48,7 +48,7 @@ export function CountdownTimer({ endTime }: CountdownTimerProps) {
             clipRule="evenodd"
           />
         </svg>
-        <span>終了</span>
+        <span>Ended</span>
       </div>
     );
   }

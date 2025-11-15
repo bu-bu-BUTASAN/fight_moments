@@ -96,7 +96,7 @@ export function MomentRegistrationForm({
     }
 
     if (!videoFile || !thumbnailFile) {
-      setFormError("動画とサムネイル画像の両方を選択してください");
+      setFormError("Please select both video and thumbnail image");
       return;
     }
 
@@ -127,7 +127,7 @@ export function MomentRegistrationForm({
             setFormError(
               err instanceof Error
                 ? err.message
-                : "トランザクション送信に失敗しました",
+                : "Failed to submit transaction",
             );
             setIsRegistering(false);
           },
@@ -135,9 +135,7 @@ export function MomentRegistrationForm({
       );
     } catch (uploadErr) {
       setFormError(
-        uploadErr instanceof Error
-          ? uploadErr.message
-          : "Walrus アップロードに失敗しました",
+        uploadErr instanceof Error ? uploadErr.message : "Walrus upload failed",
       );
     }
   };
@@ -147,15 +145,15 @@ export function MomentRegistrationForm({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900">Moment メタデータ</h2>
+        <h2 className="text-2xl font-bold text-gray-900">Moment Metadata</h2>
         <p className="text-sm text-gray-500">
-          実行ボタンで Walrus への動画/サムネイルアップロードが走り、取得した
-          blob ID を使って NFT 登録が行われます。
+          Clicking execute will upload video/thumbnail to Walrus and register
+          the NFT using the obtained blob IDs.
         </p>
         {!ENV_ADMIN_CAP_ID && (
           <div className="mt-2 rounded-md border border-yellow-200 bg-yellow-50 p-3 text-xs text-yellow-900">
-            NEXT_PUBLIC_ADMIN_CAP_ID を設定してください（環境変数から Admin Cap
-            ID を参照します）。
+            Please set NEXT_PUBLIC_ADMIN_CAP_ID (Admin Cap ID is referenced from
+            environment variable).
           </div>
         )}
       </div>
@@ -276,7 +274,7 @@ export function MomentRegistrationForm({
             htmlFor="videoFile"
             className="block text-sm font-medium text-gray-700"
           >
-            動画ファイル (MP4, WebM, Ogg - 30秒以内)
+            Video File (MP4, WebM, Ogg - under 30 seconds)
           </label>
           <input
             id="videoFile"
@@ -289,7 +287,7 @@ export function MomentRegistrationForm({
           />
           {videoFile && (
             <p className="mt-1 text-xs text-gray-600">
-              選択中: {videoFile.name}
+              Selected: {videoFile.name}
             </p>
           )}
         </div>
@@ -299,7 +297,7 @@ export function MomentRegistrationForm({
             htmlFor="thumbnailFile"
             className="block text-sm font-medium text-gray-700"
           >
-            サムネイル画像 (JPEG, PNG, WebP)
+            Thumbnail Image (JPEG, PNG, WebP)
           </label>
           <input
             id="thumbnailFile"
@@ -314,7 +312,7 @@ export function MomentRegistrationForm({
           />
           {thumbnailFile && (
             <p className="mt-1 text-xs text-gray-600">
-              選択中: {thumbnailFile.name}
+              Selected: {thumbnailFile.name}
             </p>
           )}
         </div>
@@ -330,13 +328,13 @@ export function MomentRegistrationForm({
                   />
                 </div>
                 <p className="text-xs text-gray-600">
-                  {Math.round(progress)}% (Walrus アップロード中)
+                  {Math.round(progress)}% (Uploading to Walrus)
                 </p>
               </div>
             )}
             {isRegistering && (
               <p className="text-xs text-blue-700">
-                トランザクション送信中です。ウォレットで承認を完了してください。
+                Sending transaction. Please complete approval in your wallet.
               </p>
             )}
           </div>
@@ -353,7 +351,7 @@ export function MomentRegistrationForm({
           disabled={isUploading || isRegistering}
           className="w-full rounded-md bg-blue-600 px-4 py-3 text-white shadow-sm transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isRegistering ? "実行中..." : "実行"}
+          {isRegistering ? "Executing..." : "Execute"}
         </button>
       </form>
     </div>

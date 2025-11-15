@@ -6,13 +6,13 @@ interface LiveStatsProps {
   totalMoments?: number;
 }
 
-// ダミーの最新Mint情報
+// Dummy recent mint information
 const recentMints = [
-  { fighter: "Takeru vs Rodtang", serial: "#3/10", time: "2秒前" },
-  { fighter: "Superbon vs Marat", serial: "#7/15", time: "5秒前" },
-  { fighter: "Tawanchai vs Davit", serial: "#12/20", time: "8秒前" },
-  { fighter: "Jonathan vs Fabricio", serial: "#5/10", time: "11秒前" },
-  { fighter: "Stamp vs Phetjeeja", serial: "#9/12", time: "15秒前" },
+  { fighter: "Takeru vs Rodtang", serial: "#3/10", time: "2s ago" },
+  { fighter: "Superbon vs Marat", serial: "#7/15", time: "5s ago" },
+  { fighter: "Tawanchai vs Davit", serial: "#12/20", time: "8s ago" },
+  { fighter: "Jonathan vs Fabricio", serial: "#5/10", time: "11s ago" },
+  { fighter: "Stamp vs Phetjeeja", serial: "#9/12", time: "15s ago" },
 ];
 
 export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
@@ -21,7 +21,7 @@ export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
   const [todayMints, setTodayMints] = useState(47);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // ローテーション表示
+  // Rotation display
   useEffect(() => {
     const interval = setInterval(() => {
       setIsTransitioning(true);
@@ -33,7 +33,7 @@ export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
     return () => clearInterval(interval);
   }, []);
 
-  // 視聴者数とMint数の増加
+  // Increase viewer count and mint count
   useEffect(() => {
     const interval = setInterval(() => {
       setViewerCount((prev) => prev + Math.floor(Math.random() * 3));
@@ -49,9 +49,9 @@ export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
   return (
     <div className="bg-black border-t border-red-900 text-white px-6 py-3 shadow-lg">
       <div className="max-w-7xl mx-auto">
-        {/* リアルタイム情報ストリーム */}
+        {/* Real-time information stream */}
         <div className="flex items-center justify-between">
-          {/* 左: ローテーション情報 */}
+          {/* Left: Rotation information */}
           <div className="flex-1 min-w-0">
             <div
               className={`transition-all duration-300 ${
@@ -64,7 +64,7 @@ export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
                 <div className="flex items-center gap-3">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                    <span className="text-sm text-gray-400">最新Mint</span>
+                    <span className="text-sm text-gray-400">Latest Mint</span>
                   </div>
                   <span className="text-lg font-bold text-red-400">
                     {currentMint.fighter}
@@ -90,12 +90,12 @@ export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="text-sm text-gray-400">現在視聴中</span>
+                    <span className="text-sm text-gray-400">Watching Now</span>
                   </div>
                   <span className="text-lg font-bold text-red-400">
                     {viewerCount.toLocaleString()}
                   </span>
-                  <span className="text-sm text-gray-400">人が視聴中</span>
+                  <span className="text-sm text-gray-400">viewers</span>
                 </div>
               )}
               {currentIndex === 2 && (
@@ -113,14 +113,12 @@ export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="text-sm text-gray-400">本日のMint</span>
+                    <span className="text-sm text-gray-400">Today's Mints</span>
                   </div>
                   <span className="text-lg font-bold text-red-400">
                     {todayMints}
                   </span>
-                  <span className="text-sm text-gray-400">
-                    件のNFTがMint済み
-                  </span>
+                  <span className="text-sm text-gray-400">NFTs minted</span>
                 </div>
               )}
               {currentIndex === 3 && (
@@ -136,12 +134,16 @@ export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
                       <path d="M3 7v3c0 1.657 3.134 3 7 3s7-1.343 7-3V7c0 1.657-3.134 3-7 3S3 8.657 3 7z" />
                       <path d="M17 5c0 1.657-3.134 3-7 3S3 6.657 3 5s3.134-3 7-3 7 1.343 7 3z" />
                     </svg>
-                    <span className="text-sm text-gray-400">残りSupply</span>
+                    <span className="text-sm text-gray-400">
+                      Remaining Supply
+                    </span>
                   </div>
                   <span className="text-lg font-bold text-red-400">
                     103/150
                   </span>
-                  <span className="text-sm text-gray-400">早い者勝ち！</span>
+                  <span className="text-sm text-gray-400">
+                    First come, first served!
+                  </span>
                 </div>
               )}
               {currentIndex === 4 && (
@@ -155,20 +157,20 @@ export function LiveStats({ totalMoments = 0 }: LiveStatsProps) {
                       <title>Alert</title>
                       <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                     </svg>
-                    <span className="text-sm text-gray-400">⚡ 緊急</span>
+                    <span className="text-sm text-gray-400">⚡ Alert</span>
                   </div>
                   <span className="text-lg font-bold text-red-500">
-                    {totalMoments}個のMoment
+                    {totalMoments} Moments
                   </span>
                   <span className="text-sm text-gray-400">
-                    が今すぐMint可能！
+                    available for mint now!
                   </span>
                 </div>
               )}
             </div>
           </div>
 
-          {/* 右: 進捗インジケーター */}
+          {/* Right: Progress indicator */}
           <div className="flex items-center gap-2 ml-4">
             {[0, 1, 2, 3, 4].map((index) => (
               <div

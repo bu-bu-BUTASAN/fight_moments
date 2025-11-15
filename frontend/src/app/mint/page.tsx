@@ -14,7 +14,7 @@ export default function MintPage() {
 
   const handleMintSuccess = (digest: string) => {
     setSuccessDigest(digest);
-    // 5秒後に成功メッセージを自動で消す
+    // Auto-dismiss success message after 5 seconds
     setTimeout(() => {
       setSuccessDigest(null);
     }, 5000);
@@ -27,7 +27,7 @@ export default function MintPage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             Fight Moments Mint
           </h1>
-          <p className="text-gray-600">ウォレットを接続してください</p>
+          <p className="text-gray-600">Please connect your wallet</p>
         </div>
       </div>
     );
@@ -59,7 +59,7 @@ export default function MintPage() {
               </div>
               <div className="ml-3 flex-1">
                 <h3 className="text-sm font-medium text-white">
-                  Mint が成功しました！
+                  Mint successful!
                 </h3>
                 <p className="text-xs text-gray-400 mt-1 break-all">
                   Transaction: {successDigest.slice(0, 20)}...
@@ -70,7 +70,7 @@ export default function MintPage() {
                   rel="noopener noreferrer"
                   className="text-xs text-red-400 hover:text-red-300 underline mt-1 inline-block"
                 >
-                  Suiscanで確認 →
+                  View on Suiscan →
                 </a>
               </div>
             </div>
@@ -92,10 +92,11 @@ export default function MintPage() {
           <div className="p-6">
             <div className="mb-6">
               <h2 className="text-2xl font-bold text-white mb-2">
-                🔥 Mint可能なMoments
+                🔥 Mintable Moments
               </h2>
               <p className="text-sm text-gray-400">
-                試合を見ながら今すぐMint！逃すと二度と手に入りません
+                Mint now while watching the match! Once gone, they're gone
+                forever
               </p>
             </div>
 
