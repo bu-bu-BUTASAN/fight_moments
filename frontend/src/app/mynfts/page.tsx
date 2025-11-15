@@ -3,6 +3,7 @@
 import { useCurrentAccount } from "@mysten/dapp-kit";
 import { useState } from "react";
 import { NFTsList } from "@/components/mynfts/NFTsList";
+import { getSuiscanUrl } from "@/lib/constants";
 
 export default function MyNFTsPage() {
   const currentAccount = useCurrentAccount();
@@ -61,12 +62,12 @@ export default function MyNFTsPage() {
                   Transaction: {successDigest}
                 </p>
                 <a
-                  href={`https://testnet.suivision.xyz/txblock/${successDigest}`}
+                  href={getSuiscanUrl(successDigest)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-green-700 hover:text-green-900 underline mt-1 inline-block"
                 >
-                  Explorerで確認 →
+                  Suiscanで確認 →
                 </a>
               </div>
             </div>

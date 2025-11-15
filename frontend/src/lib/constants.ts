@@ -24,6 +24,9 @@ export const CLOCK_ID = "0x6"; // Shared Clock object
 export const WALRUS_RELAY_URL =
   process.env.NEXT_PUBLIC_WALRUS_RELAY_URL ||
   "https://publisher.walrus-testnet.walrus.space";
+export const WALRUS_AGGREGATOR_URL =
+  process.env.NEXT_PUBLIC_WALRUS_AGGREGATOR_URL ||
+  "https://aggregator.walrus-testnet.walrus.space";
 
 // Video Constraints
 export const MAX_VIDEO_DURATION_SECONDS = 30;
@@ -43,4 +46,12 @@ export function mistToSui(mist: number): number {
  */
 export function suiToMist(sui: number): number {
   return Math.floor(sui * MIST_PER_SUI);
+}
+
+/**
+ * Suiscan Explorer の URL を生成
+ */
+export function getSuiscanUrl(digest: string): string {
+  const network = SUI_NETWORK === "mainnet" ? "mainnet" : "testnet";
+  return `https://suiscan.xyz/${network}/tx/${digest}`;
 }

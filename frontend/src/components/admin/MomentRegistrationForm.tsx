@@ -86,6 +86,8 @@ export function MomentRegistrationForm({
       videoWalrusUri: videoResult.uri,
       thumbnailWalrusUri: thumbnailResult.uri,
       blobId: videoResult.blobId,
+      videoBlobId: videoResult.blobId,
+      thumbnailBlobId: thumbnailResult.blobId,
       contentHash: videoResult.hash,
     });
 

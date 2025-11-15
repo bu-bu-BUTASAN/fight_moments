@@ -26,7 +26,10 @@ export function MomentCard({ moment, onMintSuccess }: MomentCardProps) {
   );
 
   useEffect(() => {
-    setThumbnailSrc(getWalrusViewUrl(moment.thumbnailWalrusUri));
+    const url = getWalrusViewUrl(moment.thumbnailWalrusUri);
+    console.log("[MomentCard] Thumbnail URI:", moment.thumbnailWalrusUri);
+    console.log("[MomentCard] Generated URL:", url);
+    setThumbnailSrc(url);
   }, [moment.thumbnailWalrusUri]);
 
   const handleMint = () => {

@@ -2,6 +2,7 @@
  * Walrus Upload Relay 経由のファイルアップロード
  */
 
+import { WALRUS_AGGREGATOR_URL } from "@/lib/constants";
 import type { WalrusUploadResult } from "@/types/walrus";
 import { walrusConfig } from "./client";
 
@@ -68,5 +69,5 @@ export async function uploadToWalrus(
 export function getWalrusViewUrl(uri: string): string {
   // walrus://blob_id の形式から blob_id を抽出
   const blobId = uri.replace("walrus://", "");
-  return `${walrusConfig.relayUrl}/v1/blobs/${blobId}`;
+  return `${WALRUS_AGGREGATOR_URL}/v1/blobs/${blobId}`;
 }

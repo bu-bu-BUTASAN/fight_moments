@@ -3,6 +3,7 @@
 import { useCurrentAccount } from "@mysten/dapp-kit";
 import { useState } from "react";
 import { MomentRegistrationForm } from "@/components/admin/MomentRegistrationForm";
+import { getSuiscanUrl } from "@/lib/constants";
 
 export default function AdminPage() {
   const currentAccount = useCurrentAccount();
@@ -41,12 +42,12 @@ export default function AdminPage() {
                   Transaction Digest: {successDigest}
                 </p>
                 <a
-                  href={`https://testnet.suivision.xyz/txblock/${successDigest}`}
+                  href={getSuiscanUrl(successDigest)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline text-sm mt-2 inline-block"
                 >
-                  Sui Explorerで確認 →
+                  Suiscanで確認 →
                 </a>
               </div>
 

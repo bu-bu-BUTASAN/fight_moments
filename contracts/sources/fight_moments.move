@@ -57,13 +57,13 @@ fun setup_display(publisher: &package::Publisher, ctx: &mut TxContext) {
     
     display::add(&mut display, string::utf8(b"name"), string::utf8(b"Fight Moment #{match_id} - {moment_type}"));
     display::add(&mut display, string::utf8(b"description"), string::utf8(b"{fighter_a} vs {fighter_b}"));
-    display::add(&mut display, string::utf8(b"image_url"), string::utf8(b"{media.thumbnail_uri}"));
-    display::add(&mut display, string::utf8(b"animation_url"), string::utf8(b"{media.video_uri}"));
+    display::add(&mut display, string::utf8(b"image_url"), string::utf8(b"https://aggregator.walrus-testnet.walrus.space/v1/blobs/{media.thumbnail_blob_id}"));
+    display::add(&mut display, string::utf8(b"animation_url"), string::utf8(b"https://aggregator.walrus-testnet.walrus.space/v1/blobs/{media.video_blob_id}"));
     display::add(&mut display, string::utf8(b"project_url"), string::utf8(b"https://fightmoments.xyz"));
     display::add(&mut display, string::utf8(b"collection_id"), string::utf8(b"{collection_id}"));
     
     display::update_version(&mut display);
-    transfer::public_transfer(display, tx_context::sender(ctx));
+    transfer::public_share_object(display);
 }
 
 // ===== Test-only Functions =====

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { MarketplaceNFTsList } from "@/components/marketplace/MarketplaceNFTsList";
 import { useMarketplaceListings } from "@/hooks/useMarketplace";
 import { useUserKioskCaps } from "@/hooks/useUserNFTs";
+import { getSuiscanUrl } from "@/lib/constants";
 
 export default function MarketplacePage() {
   const currentAccount = useCurrentAccount();
@@ -21,13 +22,18 @@ export default function MarketplacePage() {
   );
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [successDigest, setSuccessDigest] = useState<string | null>(null);
 
   const handlePurchaseSuccess = (digest: string) => {
+    setSuccessDigest(digest);
     setSuccessMessage(
       `NFTを購入しました! トランザクション: ${digest.slice(0, 8)}...`,
     );
     // 5秒後にメッセージを消す
-    setTimeout(() => setSuccessMessage(null), 5000);
+    setTimeout(() => {
+      setSuccessMessage(null);
+      setSuccessDigest(null);
+    }, 5000);
     // リストを再取得
     refetch();
   };
@@ -61,16 +67,16 @@ export default function MarketplacePage() {
       </div>
 
       {/* 成功メッセージ */}
-      {successMessage && (
+      {successMessage && successDigest && (
         <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
           <p className="text-green-800">{successMessage}</p>
           <Link
-            href={`https://suiscan.xyz/testnet/tx/${successMessage.match(/[0-9A-Fa-f]+/)?.[0]}`}
+            href={getSuiscanUrl(successDigest)}
             target="_blank"
             rel="noopener noreferrer"
             className="text-green-600 hover:text-green-700 text-sm underline"
           >
-            Suiscan で確認
+            Suiscanで確認 →
           </Link>
         </div>
       )}
