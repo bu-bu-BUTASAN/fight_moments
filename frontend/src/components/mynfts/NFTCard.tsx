@@ -1,7 +1,6 @@
 "use client";
 
 import { useSignAndExecuteTransaction } from "@mysten/dapp-kit";
-import Image from "next/image";
 import { useState } from "react";
 import { suiToMist } from "@/lib/constants";
 import { buildDelistNFTTx, buildListNFTTx } from "@/lib/sui/ptb";
@@ -34,6 +33,7 @@ export function NFTCard({
   const { mutate: signAndExecute } = useSignAndExecuteTransaction();
 
   const thumbnailSrc = "/sample_contents/image.png";
+  const videoUrl = "/sample_contents/videoplayback.mp4";
 
   const handleImageError = () => {
     console.log("[NFTCard] Image load failed");
@@ -149,15 +149,11 @@ export function NFTCard({
           onClick={() => setShowPreview(true)}
           aria-label="Play video"
         >
-          <Image
+          <img
             src={thumbnailSrc}
             alt={`${nft.fighterA} vs ${nft.fighterB}`}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 640px) 100vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-300 w-full h-full"
             loading="eager"
-            priority
-            unoptimized
             onError={handleImageError}
           />
 
@@ -282,7 +278,7 @@ export function NFTCard({
       <VideoPreviewModal
         isOpen={showPreview}
         onClose={() => setShowPreview(false)}
-        videoUrl="/sample_contents/videoplayback.mp4"
+        videoUrl={videoUrl}
         title={`${nft.fighterA} vs ${nft.fighterB}`}
       />
     </>
