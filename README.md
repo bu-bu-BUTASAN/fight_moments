@@ -491,3 +491,500 @@ MIT License - 詳細は [LICENSE](./LICENSE) を参照
 Made with ❤️ for Sui × ONE Championship Hackathon
 
 </div>
+
+---
+---
+
+# 🥊 Fight Moments (English)
+
+> **Exclusive NFTs of Decisive Moments - Only Available During Live Viewing**
+> Creating Revolutionary Incentives for Live Stream Engagement
+
+[![Sui Network](https://img.shields.io/badge/Sui-Network-4DA2FF?style=for-the-badge&logo=sui&logoColor=white)](https://sui.io/)
+[![Walrus Storage](https://img.shields.io/badge/Walrus-Storage-00C9A7?style=for-the-badge)](https://docs.walrus.site/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+**🏆 Sui × ONE Championship Hackathon Submission**
+
+---
+
+## 📺 Demo
+
+<!-- After recording demo video, uncomment below and insert your YouTube/Loom URL -->
+<!--
+[![Demo Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://youtu.be/YOUR_VIDEO_ID)
+
+📺 **[Watch Demo Video](https://youtu.be/YOUR_VIDEO_ID)** - 1m30s Walkthrough
+-->
+
+🌐 **Live Demo**: https://fight-moments.pages.dev/
+📦 **Smart Contract**: [View on Suiscan](https://suiscan.xyz/testnet/object/0xcb62132563f5a2a606950ae6417665d80fb06048bb2eb832618b5ee0376f4401)
+
+---
+
+## 🌟 Project Highlights
+
+### 💰 Problem We're Solving
+
+**The Biggest Challenge in Combat Sports Live Streaming: "I'll just watch the archive later"**
+
+Current sports live streaming faces critical issues:
+
+- ❌ **Lack of Real-time Viewing Motivation**: The mindset of "I can watch the archive later" **significantly devalues live streaming**
+- ❌ Videos locked into centralized platforms
+- ❌ Fans cannot officially own "that moment they witnessed"
+- ❌ Insufficient secondary revenue return to athletes and organizers
+
+### 🎯 Fight Moments NFT Solution
+
+**"Watch Now or Miss Out Forever" — Creating Revolutionary Live Viewing Incentives**
+
+| Feature | Description |
+|---------|-------------|
+| ⚡ **Real-time Mint** | Officials instantly register key moments during matches; only live viewers can mint |
+| 🎬 **Walrus Decentralized Storage** | Videos stored permanently, no central server dependency |
+| ⛓️ **Sui Ownership Proof** | Transparent blockchain-based ownership management |
+| 🎫 **Limited Supply + Serial Numbers** | On-chain supply management ensures scarcity value |
+| 💸 **Secondary Market Ready** | Fan-to-fan trading via Marketplace |
+
+### 💡 Live Viewing Motivation — Core Value Proposition
+
+**How Real-time Minting Revolutionizes Sports Live Streaming**
+
+Traditional streaming models suffer from low live viewership because fans think "I'll watch the archive later."
+This project fundamentally solves this by offering **limited-time NFTs mintable only during the match**.
+
+#### 🎯 Four Psychological Incentives
+
+1. **⏰ Time Scarcity (FOMO)**
+   - Decisive moment happens → Official registers instantly → **Mintable for only a few minutes**
+   - Miss it and **you'll never get primary issuance rights again**
+   - Archive viewers can only acquire through secondary market (potentially at premium prices)
+
+2. **🎫 Proof of Presence**
+   - NFT as witness certificate of historic moments
+   - Timestamp and serial number as permanent proof of attendance
+   - Collector's item value
+
+3. **🏆 First-Come Competition**
+   - Strict supply limits (e.g., limited to 100 people)
+   - Earlier mints get lower serial numbers (#1, #2...)
+   - Community status acquisition
+
+4. **📈 Investment Value**
+   - Rare NFTs exclusive to real-time participants → High secondary market value
+   - Legendary match NFTs may trade at premium prices in the future
+   - Combines fan activity with investment
+
+#### 📊 Business Impact
+
+- **PPV Purchase Motivation**: Fans buy live stream access to obtain NFTs
+- **Advertising Value Increase**: Higher live viewer count → Higher ad rates
+- **Community Activation**: Foundation for engagement initiatives like NFT holder-exclusive events
+- **Athlete/Organizer Revenue**: Continuous revenue through secondary market royalties
+
+→ ### **From "I'll watch the archive later" to "Must watch now or lose forever"**
+
+### ⚡ Technical Innovation
+
+- ✅ **Real-time Mint**: Instantly NFT-ify decisive moments during matches; live viewer exclusive minting
+- ✅ **Walrus × Sui Integration**: Practical implementation of video NFTs
+- ✅ **Supply Management**: On-chain scarcity control (max_supply setting)
+- ✅ **Display Optimization**: Full Sui Explorer compatibility (HTTPS URL fixed)
+- ✅ **Admin Authorization**: Quality-assured registration flow via AdminCap
+
+---
+
+## 📸 Screenshots
+
+<!-- After taking screenshots, uncomment below -->
+<!-- If you've placed images in docs/screenshots/, uncomment this section -->
+
+<!--
+### Landing Page
+![Landing Page](./docs/screenshots/01_landing.png)
+
+### Mint Screen
+![Mint Screen](./docs/screenshots/02_mint.png)
+
+### NFT Detail (Walrus Video Playback)
+![NFT Detail with Walrus Video](./docs/screenshots/03_nft_detail.png)
+
+### Marketplace
+![Marketplace](./docs/screenshots/04_marketplace.png)
+-->
+
+> 📸 **Screenshot Guide**: [`docs/screenshots/README.md`](./docs/screenshots/README.md)
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+graph LR
+    A[👤 Admin] -->|Upload Video| B[📦 Walrus Storage]
+    B -->|Get Blob ID| C[📜 Sui Move Contract]
+    C -->|Register Moment| D[🎫 MintableMoment]
+    E[👥 User] -->|Execute Mint| D
+    D -->|Issue NFT| F[🖼️ FightMomentNFT]
+    F -->|Display Metadata| G[🌐 Sui Explorer / Marketplace]
+    B -->|Stream Video| G
+
+    style A fill:#FFE4B5
+    style B fill:#E0F7FA
+    style C fill:#C5E1A5
+    style D fill:#FFCCBC
+    style E fill:#FFE4B5
+    style F fill:#F8BBD0
+    style G fill:#D1C4E9
+```
+
+### Core Design Principles
+
+- **Separation of Concerns**: Storage (Walrus) / Ownership (Sui) / UI (Next.js)
+- **Admin Authorization Control**: Official Moment registration restricted via AdminCap
+- **Supply Management**: Scarcity guarantee through max_supply constraints
+- **Permanence**: Videos stored permanently on Walrus distributed storage
+
+---
+
+## 🛠️ Tech Stack
+
+### Blockchain & Storage
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| **Sui Move** | Smart Contracts | 2024.beta edition |
+| **Walrus** | Decentralized Video Storage | Testnet |
+| **@mysten/dapp-kit** | Sui Wallet Integration | Latest |
+
+### Frontend
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| **Next.js** | Frontend Framework | 16.x (App Router) |
+| **React** | UI Library | 19.x |
+| **TypeScript** | Type Safety | 5.x |
+| **Tailwind CSS** | Styling | v4 |
+| **Biome** | Lint/Format | Latest |
+
+---
+
+## ✨ Key Features
+
+### 1. 🎬 Moment Registration (Admin Only)
+
+**Register Key Moments in Real-time During Matches**
+
+During combat sports matches, immediately after decisive moments like KOs, submissions, or decisions, official administrators execute:
+
+- 📹 Upload key moment video file to Walrus
+- 🔗 Obtain Blob ID and register to Move Contract
+- ⚙️ Configure Moment info (title, description, max supply)
+- ⚡ **Only fans watching the live broadcast can mint immediately**
+
+```typescript
+// Only Admin can execute (AdminCap holder)
+register_mintable_moment(
+  admin_cap: &AdminCap,
+  title: String,
+  description: String,
+  media_url: String,  // Walrus Blob URL
+  max_supply: u64,    // Maximum supply
+  ctx: &mut TxContext
+)
+```
+
+### 2. 🎫 NFT Mint (User)
+
+**Only fans watching live can mint immediately**
+
+Real-time value:
+- ⚡ Decisive moment happens → Official registers instantly → **Only those watching that moment can mint limited NFTs**
+- 🎫 Limited quantity issued on first-come basis (e.g., first 100 people only)
+- 🏆 Live viewer privilege; rare NFT proving you "were there"
+
+Mint Flow:
+- Select from registered Moment list
+- Click Mint button to execute transaction
+- Receive NFT with serial number (e.g., #3/10)
+
+```typescript
+// Anyone can mint (up to supply limit)
+mint_moment(
+  mintable: &mut MintableMoment,
+  payment: Coin<SUI>,
+  ctx: &mut TxContext
+): FightMomentNFT
+```
+
+### 3. 📊 Supply Management
+
+**On-chain Scarcity Control**
+
+- Set maximum supply (max_supply) for each Moment
+- Track current mint count
+- Minting disabled after limit reached (displayed on frontend)
+
+### 4. 🔄 Marketplace
+
+**NFT Secondary Market**
+
+- Display issued NFT list
+- Trading via Sui Kiosk
+- Transfer Policy applied (royalty configured)
+
+---
+
+## 🚀 Deployment Information
+
+### Sui Testnet
+
+| Item | Value |
+|------|-------|
+| **Network** | Sui Testnet |
+| **Package ID** | `0xcb62132563f5a2a606950ae6417665d80fb06048bb2eb832618b5ee0376f4401` |
+| **Transfer Policy** | `0x5a9a3cf651d84104178b2d3ebc415d7f9c9d249d9969f083a2e3da88b17fe3a7` |
+| **Admin Cap** | `0x97bb2c72fc4fda471b84dd606fa38534a3f017f28a5b1525017a9ff0e0d70b83` |
+| **Collection ID** | `fight-moments-v1` |
+
+### Walrus Testnet
+
+| Item | Value |
+|------|-------|
+| **Publisher URL** | `https://publisher.walrus-testnet.walrus.space` |
+| **Aggregator URL** | `https://aggregator.walrus-testnet.walrus.space` |
+
+### Frontend Deployment
+
+- **Platform**: Cloudflare Pages
+- **URL**: https://fight-moments.pages.dev/
+
+---
+
+## 💡 Technical Challenges & Solutions
+
+### 1. 🎥 Video Permanence Problem
+
+**Challenge**: Dependency on centralized storage (AWS S3, YouTube, etc.)
+
+**Solution**:
+- Integration with Walrus distributed storage
+- Manage Blob ID on-chain
+- Video streaming via Walrus Aggregator
+
+```typescript
+// Walrus Blob URL format
+https://aggregator.walrus-testnet.walrus.space/v1/{blob_id}
+```
+
+### 2. 🖼️ NFT Metadata Flexibility
+
+**Challenge**: NFT display URL format issues in Sui Explorer
+
+**Solution**:
+- Specify HTTPS URL in Display settings
+- Support both image_url and media_url
+- Fixed in recent commit (`b0d61a7`)
+
+```move
+// Display settings (Move Contract)
+display.add(b"image_url", b"https://aggregator.walrus-testnet.walrus.space/v1/{media_url}");
+```
+
+### 3. ⚙️ Supply Management Reliability
+
+**Challenge**: Implement NFT issuance cap control on-chain
+
+**Solution**:
+- Manage current_supply/max_supply in MintableMoment struct
+- Cap check with assert! during mint
+- Frontend also displays progress (5/10 Minted, etc.)
+
+---
+
+## 📦 Local Setup
+
+### Prerequisites
+
+- Node.js 20+ or Bun
+- Sui CLI (for Smart Contract development)
+- Sui Wallet (Chrome extension)
+
+### Setup (3 Steps)
+
+#### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/fight_moments.git
+cd fight_moments
+```
+
+#### 2️⃣ Environment Variables
+
+```bash
+cd frontend
+cp .env.example .env
+```
+
+Edit `.env` file with your deployed contract information:
+
+```bash
+NEXT_PUBLIC_PACKAGE_ID=0xcb62...  # Your Package ID
+NEXT_PUBLIC_ADMIN_CAP_ID=0x97bb...  # Admin Cap ID
+# Configure other environment variables
+```
+
+> 📄 See [`frontend/.env.example`](./frontend/.env.example) for details
+
+#### 3️⃣ Launch
+
+```bash
+# Install dependencies
+bun install  # or npm install
+
+# Start development server
+bun dev  # or npm run dev
+```
+
+Open http://localhost:3000 in browser
+
+---
+
+## 🏆 Sui × ONE Championship Hackathon Fit
+
+### Innovative Value Proposition for ONE Championship
+
+**The Greatest Value of This Project: Dramatic Live Streaming Viewership Increase**
+
+For combat sports events, **live streaming viewer count** is the business lifeline.
+Fight Moments NFT directly impacts this crucial KPI through real-time minting.
+
+| ONE Championship Challenge/Value | Realized by Fight Moments NFT |
+|---------------------------------|------------------------------|
+| 📺 **Maximize Live Viewership** 🔥 | **Limited NFTs mintable only during matches** create "watch now or lose out" psychology → Dramatic PPV purchases and viewer increase |
+| ⚡ **Monetize Dramatic Moments** | Perpetuate decisive moments like KOs and submissions; fans can own them |
+| 🌏 **Global Fan Base** | Worldwide fans compete for same NFTs simultaneously; cross-border unity |
+| 🎖️ **Maximize Athlete Value** | Athletes' iconic moments circulate as fan assets; enhances athlete brand value |
+| 📈 **Build New Revenue Model** | Continuous revenue through secondary market royalties; NFT holder-exclusive content, etc. |
+
+### Sui Network Technical Advantages
+
+| Sui Feature | Utilized in This Project |
+|-------------|-------------------------|
+| ⚡ **High-speed Transactions** | Essential for real-time minting during matches; instant mint processing |
+| 💰 **Low Cost** | Live viewers can casually mint multiple NFTs |
+| 🎨 **Rich Display Features** | Flexible NFT metadata display |
+| 🔧 **Move Language Safety** | Strict implementation of supply control and admin authorization |
+
+### Hackathon Theme Alignment
+
+- ✅ **DeFi/NFT Utilization**: NFT Marketplace + Royalty Distribution
+- ✅ **Infrastructure**: Walrus Distributed Storage Integration
+- ✅ **Gaming/Entertainment**: Sports Entertainment × Fan Engagement
+- ✅ **Maximum Sui Tech Utilization**: Move 2024.beta + Display + Kiosk
+
+---
+
+## 🎬 About Demo Video
+
+> 📹 **Recording Script**: [`docs/DEMO_SCRIPT.md`](./docs/DEMO_SCRIPT.md)
+
+If creating a demo video, please refer to the script above.
+Recommended duration: **1m30s**
+
+---
+
+## 📁 Repository Structure
+
+```
+fight_moments/
+├── contracts/              # Sui Move Smart Contracts
+│   ├── sources/
+│   │   └── contracts.move  # FightMomentNFT, MintableMoment definitions
+│   ├── Move.toml
+│   └── Move.lock
+├── frontend/               # Next.js Frontend
+│   ├── src/
+│   │   ├── app/           # App Router (pages)
+│   │   ├── components/    # React Components
+│   │   ├── lib/           # Utilities, Constants
+│   │   └── hooks/         # Custom Hooks
+│   ├── public/
+│   ├── package.json
+│   ├── .env.example       # Environment variables sample
+│   └── biome.json         # Linter config
+├── docs/                  # Documentation
+│   ├── screenshots/       # For screenshots
+│   │   └── README.md      # Recording guide
+│   └── DEMO_SCRIPT.md     # Demo video script
+└── README.md              # This document
+```
+
+---
+
+## 🛣️ Roadmap
+
+### ✅ Phase 1: MVP (Completed)
+
+- [x] Sui Move Contract implementation (NFT + Supply management)
+- [x] Walrus integration (video upload & streaming)
+- [x] Admin registration UI
+- [x] User Mint UI
+- [x] Marketplace basic features
+- [x] Sui Testnet deployment
+
+### 🚧 Phase 2: Enhancement (In Progress)
+
+- [ ] Frontend deployment (Vercel)
+- [ ] Screenshot capture
+- [ ] Demo video creation
+- [ ] UI/UX refinement
+
+### 🔮 Phase 3: Future (Planned)
+
+- [ ] ONE Championship official content collaboration
+- [ ] Voting feature (fans choose best moment)
+- [ ] Automatic royalty distribution
+- [ ] Cross-chain support (bridge to other chains)
+- [ ] Mobile app
+
+---
+
+## 🤝 Contribution
+
+Currently not accepting contributions as this is a hackathon submission.
+For project feedback, please use [Issues](../../issues).
+
+---
+
+## 📄 License
+
+MIT License - See [LICENSE](./LICENSE) for details
+
+---
+
+## 🙏 Acknowledgments
+
+- **Sui Foundation** - Fast and secure blockchain infrastructure
+- **Walrus Team** - Distributed storage solution
+- **ONE Championship** - Innovation in combat sports entertainment
+- **Hackathon Organizers** - Providing this amazing opportunity
+
+---
+
+## 📞 Contact
+
+For inquiries about the project:
+- GitHub Issues: [Here](../../issues)
+- X (Twitter): [@YOUR_HANDLE]  <!-- Add if needed -->
+
+---
+
+<div align="center">
+
+**🥊 Fight Moments NFT - Own the Moment, Forever 🥊**
+
+Made with ❤️ for Sui × ONE Championship Hackathon
+
+</div>
