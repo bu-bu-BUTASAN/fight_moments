@@ -1,4 +1,4 @@
-# 🥊 Fight Moments NFT
+# 🥊 Fight Moments
 
 > 格闘技の決定的瞬間を、永続的なデジタル資産として所有する
 
@@ -21,7 +21,7 @@
 📺 **[デモ動画を見る](https://youtu.be/YOUR_VIDEO_ID)** - 1分30秒のウォークスルー
 -->
 
-🌐 **ライブデモ**: [YOUR_DEPLOY_URL_HERE]
+🌐 **ライブデモ**: https://fight-moments.pages.dev/
 📦 **Smart Contract**: [View on Suiscan](https://suiscan.xyz/testnet/object/0xcb62132563f5a2a606950ae6417665d80fb06048bb2eb832618b5ee0376f4401)
 
 ---
@@ -208,8 +208,8 @@ mint_moment(
 
 ### Frontend Deployment
 
-- **Platform**: [Vercel / Netlify / その他]
-- **URL**: [YOUR_DEPLOY_URL_HERE]
+- **Platform**: Cloudflare Pages
+- **URL**: https://fight-moments.pages.dev/
 
 ---
 
