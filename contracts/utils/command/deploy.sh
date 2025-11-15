@@ -163,25 +163,19 @@ parse_deploy_result() {
     fi
 
     # TransferPolicy オブジェクトIDを取得
-    local transfer_policy_id=$(jq -r '.objectChanges[] | select(.objectType | contains("TransferPolicy")) | .objectId' "$json_file" 2>/dev/null)
+    local transfer_policy_id=$(jq -r '.objectChanges[]
+        | select(.objectType != null)
+        | select(.objectType | contains("transfer_policy::TransferPolicy<"))
+        | .objectId' "$json_file" 2>/dev/null | head -n 1)
+    transfer_policy_id=$(echo "$transfer_policy_id" | tr -d '\n')
 
     if [[ -n "$transfer_policy_id" ]]; then
         log_success "TRANSFER_POLICY_ID: ${transfer_policy_id}"
     else
         log_warning "TRANSFER_POLICY_ID が見つかりませんでした。"
     fi
-
-    # MintableMoment 共有オブジェクトIDを取得
-    local mintable_moment_id=$(jq -r '.objectChanges[] | select(.objectType | contains("MintableMoment")) | .objectId' "$json_file" 2>/dev/null)
-
-    if [[ -n "$mintable_moment_id" ]]; then
-        log_success "MINTABLE_MOMENT_ID: ${mintable_moment_id}"
-    else
-        log_warning "MINTABLE_MOMENT_ID が見つかりませんでした。"
-    fi
-
     # 環境変数ファイルを更新
-    update_env_variables "$package_id" "$admin_cap_id" "$upgrade_cap_id" "$transfer_policy_id" "$mintable_moment_id"
+    update_env_variables "$package_id" "$admin_cap_id" "$upgrade_cap_id" "$transfer_policy_id"
 }
 
 # 環境変数ファイルを更新
@@ -190,7 +184,6 @@ update_env_variables() {
     local admin_cap_id="$2"
     local upgrade_cap_id="$3"
     local transfer_policy_id="$4"
-    local mintable_moment_id="$5"
 
     log_section "環境変数ファイル更新"
 
@@ -214,10 +207,6 @@ update_env_variables() {
         update_env_file "$SELECTED_NETWORK" "TRANSFER_POLICY_ID" "$transfer_policy_id"
     fi
 
-    if [[ -n "$mintable_moment_id" ]]; then
-        update_env_file "$SELECTED_NETWORK" "MINTABLE_MOMENT_ID" "$mintable_moment_id"
-    fi
-
     # アクティブアドレスも更新
     if [[ -n "$CURRENT_ADDRESS" ]]; then
         update_env_file "$SELECTED_NETWORK" "ACTIVE_ADDRESS" "$CURRENT_ADDRESS"
@@ -226,7 +215,7 @@ update_env_variables() {
     log_success "環境変数ファイルを更新しました: .env.${SELECTED_NETWORK}"
 
     # 結果を表示
-    display_deploy_result "$package_id" "$admin_cap_id" "$upgrade_cap_id" "$transfer_policy_id" "$mintable_moment_id"
+    display_deploy_result "$package_id" "$admin_cap_id" "$upgrade_cap_id" "$transfer_policy_id"
 }
 
 # デプロイ結果を表示
@@ -235,7 +224,6 @@ display_deploy_result() {
     local admin_cap_id="$2"
     local upgrade_cap_id="$3"
     local transfer_policy_id="$4"
-    local mintable_moment_id="$5"
 
     log_section "✅ デプロイ成功！"
 
@@ -258,12 +246,6 @@ display_deploy_result() {
     if [[ -n "$transfer_policy_id" ]]; then
         echo "🔄 TRANSFER_POLICY_ID:"
         echo "   ${transfer_policy_id}"
-        echo ""
-    fi
-
-    if [[ -n "$mintable_moment_id" ]]; then
-        echo "🎯 MINTABLE_MOMENT_ID:"
-        echo "   ${mintable_moment_id}"
         echo ""
     fi
 
