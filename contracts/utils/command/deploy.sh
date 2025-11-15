@@ -44,7 +44,7 @@ get_deploy_params() {
     log_section "デプロイパラメータ入力"
 
     # ガス予算の入力
-    GAS_BUDGET=$(prompt_number "ガス予算を入力してください" "100000000")
+    GAS_BUDGET=$(prompt_number "ガス予算を入力してください" "1000000000")
 
     echo ""
     echo "📝 入力内容確認"
