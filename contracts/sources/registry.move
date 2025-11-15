@@ -5,9 +5,6 @@
 module fight_moments::registry {
     use std::string::String;
     use sui::table::{Self, Table};
-    use sui::tx_context::TxContext;
-    use sui::object::{Self, UID, ID};
-    use sui::transfer;
 
     use fight_moments::types::AdminCap;
 
@@ -15,7 +12,6 @@ module fight_moments::registry {
 
     const EMomentNotFound: u64 = 1;
     const EMomentAlreadyExists: u64 = 2;
-    const ENotAuthorized: u64 = 3;
 
     // ==================== Structs ====================
 
