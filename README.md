@@ -137,16 +137,16 @@ This project fundamentally solves that by offering **limited NFTs mintable only 
 ### ⚡ 技術的革新性<br>
 **⚡ Technical Innovation**
 
-- ✅ **リアルタイムMint**: 試合中の決定的瞬間を即座にNFT化、ライブ視聴者限定Mint
-  ✅ **Real-time Mint**: Instantly turns decisive moments into NFTs during matches; minting is exclusive to live viewers.
-- ✅ **Walrus × Sui統合**: 動画NFTの実用的実装を実現
-  ✅ **Walrus × Sui Integration**: Provides a practical implementation of video NFTs.
-- ✅ **Supply管理**: オンチェーン希少性制御（max_supply設定）
-  ✅ **Supply Management**: On-chain scarcity control via `max_supply`.
-- ✅ **Display最適化**: Sui Explorer完全対応（HTTPS URL修正済み）
-  ✅ **Display Optimization**: Fully compatible with Sui Explorer (HTTPS URL ready).
-- ✅ **Admin権限制御**: AdminCapによる品質保証された登録フロー
-  ✅ **Admin Authorization Control**: Quality-assured registration flow via `AdminCap`.
+- ✅ **リアルタイムMint**: 試合中の決定的瞬間を即座にNFT化、ライブ視聴者限定Mint<br>
+  **Real-time Mint**: Instantly turns decisive moments into NFTs during matches; minting is exclusive to live viewers.
+- ✅ **Walrus × Sui統合**: 動画NFTの実用的実装を実現<br>
+  **Walrus × Sui Integration**: Provides a practical implementation of video NFTs.
+- ✅ **Supply管理**: オンチェーン希少性制御（max_supply設定）<br>
+  **Supply Management**: On-chain scarcity control via `max_supply`.
+- ✅ **Display最適化**: Sui Explorer完全対応（HTTPS URL修正済み）<br>
+  **Display Optimization**: Fully compatible with Sui Explorer (HTTPS URL ready).
+- ✅ **Admin権限制御**: AdminCapによる品質保証された登録フロー<br>
+  **Admin Authorization Control**: Quality-assured registration flow via `AdminCap`.
 
 ### 🚀 今後の展望<br>
 **Future Vision**
