@@ -44,3 +44,11 @@ export function mistToSui(mist: number): number {
 export function suiToMist(sui: number): number {
   return Math.floor(sui * MIST_PER_SUI);
 }
+
+/**
+ * Suiscan Explorer の URL を生成
+ */
+export function getSuiscanUrl(digest: string): string {
+  const network = SUI_NETWORK === "mainnet" ? "mainnet" : "testnet";
+  return `https://suiscan.xyz/${network}/tx/${digest}`;
+}
