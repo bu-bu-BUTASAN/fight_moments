@@ -39,6 +39,11 @@ export function NFTCard({
     setThumbnailSrc(getWalrusViewUrl(nft.thumbnailUri));
   }, [nft.thumbnailUri]);
 
+  const handleImageError = () => {
+    console.log("[NFTCard] Image load failed, using fallback");
+    setThumbnailSrc("/sample_contents/image.png");
+  };
+
   const handleList = () => {
     if (!kioskId || !kioskCapId) {
       setError("Kiosk情報が見つかりません");
@@ -140,19 +145,19 @@ export function NFTCard({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all hover:border-red-500 group">
       {/* サムネイル */}
-      <div className="relative aspect-video bg-gray-100">
+      <div className="relative aspect-video bg-gray-900">
         <Image
           src={thumbnailSrc}
           alt={`${nft.fighterA} vs ${nft.fighterB}`}
           fill
-          className="object-cover"
+          className="object-cover group-hover:scale-105 transition-transform duration-300"
           sizes="(max-width: 640px) 100vw, 33vw"
           unoptimized
-          onError={() => setThumbnailSrc("/placeholder-thumbnail.png")}
+          onError={handleImageError}
         />
-        <div className="absolute top-2 right-2 bg-black bg-opacity-75 px-2 py-1 rounded">
+        <div className="absolute top-2 right-2 bg-red-600 bg-opacity-90 px-2 py-1 rounded-md shadow-lg">
           <span className="text-white text-xs font-bold">
             #{nft.serialNumber}
           </span>
@@ -162,14 +167,14 @@ export function NFTCard({
       {/* 詳細 */}
       <div className="p-4">
         <div className="mb-3">
-          <h3 className="text-lg font-bold text-gray-900">
+          <h3 className="text-lg font-bold text-white">
             {nft.fighterA} vs {nft.fighterB}
           </h3>
-          <p className="text-sm text-gray-600">Match: {nft.matchId}</p>
+          <p className="text-sm text-gray-400">Match: {nft.matchId}</p>
         </div>
 
         <div className="flex items-center justify-between mb-3">
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-900 text-red-200 border border-red-700">
             {momentTypeToString(nft.momentType)}
           </span>
           <span className="text-xs text-gray-500">
@@ -180,17 +185,17 @@ export function NFTCard({
         {/* 出品フォーム */}
         {isListed ? (
           <div className="space-y-2">
-            <div className="bg-blue-50 border border-blue-200 rounded-md p-2 mb-2">
-              <p className="text-xs text-blue-700 text-center">
-                このNFTは出品中です
+            <div className="bg-red-950 border border-red-800 rounded-md p-2 mb-2">
+              <p className="text-xs text-red-300 text-center font-medium">
+                📢 このNFTは出品中です
               </p>
             </div>
-            {error && <p className="text-xs text-red-600">{error}</p>}
+            {error && <p className="text-xs text-red-400">{error}</p>}
             <button
               type="button"
               onClick={handleDelist}
               disabled={isDelisting || !kioskId || !kioskCapId}
-              className="w-full px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="w-full px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium border border-gray-600"
             >
               {isDelisting ? "取消中..." : "出品を取り消す"}
             </button>
@@ -200,16 +205,16 @@ export function NFTCard({
             type="button"
             onClick={() => setShowListForm(true)}
             disabled={!kioskId || !kioskCapId}
-            className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+            className="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium shadow-lg"
           >
-            出品する
+            💎 出品する
           </button>
         ) : (
           <div className="space-y-2">
             <div>
               <label
                 htmlFor={`price-${nft.id}`}
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-300 mb-1"
               >
                 価格 (SUI)
               </label>
@@ -221,21 +226,21 @@ export function NFTCard({
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="例: 10.5"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 bg-gray-900 border border-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                 disabled={isListing}
               />
             </div>
 
-            {error && <p className="text-xs text-red-600">{error}</p>}
+            {error && <p className="text-xs text-red-400">{error}</p>}
 
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={handleList}
                 disabled={isListing || !price}
-                className="flex-1 px-3 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                className="flex-1 px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
               >
-                {isListing ? "出品中..." : "確定"}
+                {isListing ? "出品中..." : "✓ 確定"}
               </button>
               <button
                 type="button"
@@ -245,7 +250,7 @@ export function NFTCard({
                   setError(null);
                 }}
                 disabled={isListing}
-                className="flex-1 px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 disabled:opacity-50 text-sm font-medium"
+                className="flex-1 px-3 py-2 bg-gray-700 text-gray-300 rounded-md hover:bg-gray-600 disabled:opacity-50 text-sm font-medium border border-gray-600"
               >
                 キャンセル
               </button>
