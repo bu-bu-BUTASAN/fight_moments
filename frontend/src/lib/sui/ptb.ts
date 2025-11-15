@@ -3,7 +3,12 @@
  */
 
 import { Transaction } from "@mysten/sui/transactions";
-import { CLOCK_ID, PACKAGE_ID, TRANSFER_POLICY_ID } from "../constants";
+import {
+  CLOCK_ID,
+  MOMENT_REGISTRY_ID,
+  PACKAGE_ID,
+  TRANSFER_POLICY_ID,
+} from "../constants";
 
 /**
  * Moment 登録用の PTB を構築
@@ -14,9 +19,6 @@ export function buildRegisterMomentTx(params: {
   fighterA: string;
   fighterB: string;
   momentType: string;
-  videoWalrusUri: string;
-  thumbnailWalrusUri: string;
-  blobId: string;
   videoBlobId: string;
   thumbnailBlobId: string;
   contentHash: string;
@@ -24,21 +26,27 @@ export function buildRegisterMomentTx(params: {
 }) {
   const tx = new Transaction();
 
+  // Walrus URIを生成
+  const videoUri = `walrus://${params.videoBlobId}`;
+  const thumbnailUri = `walrus://${params.thumbnailBlobId}`;
+  const blobId = params.videoBlobId; // メインのblob IDとしてvideoを使用
+
   tx.moveCall({
     target: `${PACKAGE_ID}::admin::register_moment`,
     arguments: [
-      tx.object(params.adminCapId),
-      tx.pure.string(params.matchId),
-      tx.pure.string(params.fighterA),
-      tx.pure.string(params.fighterB),
-      tx.pure.string(params.momentType),
-      tx.pure.string(params.videoWalrusUri),
-      tx.pure.string(params.thumbnailWalrusUri),
-      tx.pure.string(params.blobId),
-      tx.pure.string(params.videoBlobId),
-      tx.pure.string(params.thumbnailBlobId),
-      tx.pure.string(params.contentHash),
-      tx.pure.u64(params.maxSupply),
+      tx.object(MOMENT_REGISTRY_ID), // moment_registry: &mut MomentRegistry
+      tx.object(params.adminCapId), // admin_cap: &AdminCap
+      tx.pure.string(params.matchId), // match_id: String
+      tx.pure.string(params.fighterA), // fighter_a: String
+      tx.pure.string(params.fighterB), // fighter_b: String
+      tx.pure.string(params.momentType), // moment_type: String
+      tx.pure.string(videoUri), // video_uri: String
+      tx.pure.string(thumbnailUri), // thumbnail_uri: String
+      tx.pure.string(blobId), // blob_id: String
+      tx.pure.string(params.videoBlobId), // video_blob_id: String
+      tx.pure.string(params.thumbnailBlobId), // thumbnail_blob_id: String
+      tx.pure.string(params.contentHash), // content_hash: String
+      tx.pure.u64(params.maxSupply), // max_supply: u64
     ],
   });
 
@@ -54,6 +62,7 @@ export function buildCreateKioskAndMintTx(params: { momentId: string }) {
   tx.moveCall({
     target: `${PACKAGE_ID}::accessor::create_kiosk_and_mint`,
     arguments: [
+      tx.object(MOMENT_REGISTRY_ID), // moment_registry: &mut MomentRegistry
       tx.object(params.momentId), // moment: &mut MintableMoment
       tx.object(TRANSFER_POLICY_ID), // policy: &TransferPolicy<FightMomentNFT>
       tx.object(CLOCK_ID), // clock: &Clock
@@ -76,6 +85,7 @@ export function buildMintAndLockTx(params: {
   tx.moveCall({
     target: `${PACKAGE_ID}::accessor::mint_and_lock`,
     arguments: [
+      tx.object(MOMENT_REGISTRY_ID), // moment_registry: &mut MomentRegistry
       tx.object(params.momentId), // moment: &mut MintableMoment
       tx.object(params.kioskId), // kiosk: &mut Kiosk
       tx.object(params.kioskCapId), // kiosk_cap: &KioskOwnerCap

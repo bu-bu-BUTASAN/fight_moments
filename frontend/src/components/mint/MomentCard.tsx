@@ -3,8 +3,8 @@
 import { useSignAndExecuteTransaction } from "@mysten/dapp-kit";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { convertWalrusUriToHttps } from "@/lib/constants";
 import { buildCreateKioskAndMintTx } from "@/lib/sui/ptb";
-import { getWalrusViewUrl } from "@/lib/walrus/upload";
 import type { MintableMoment } from "@/types/contract";
 import { momentTypeToString } from "@/types/contract";
 
@@ -22,11 +22,11 @@ export function MomentCard({ moment, onMintSuccess }: MomentCardProps) {
   const remainingSupply = moment.maxSupply - moment.mintedCount;
   const isSoldOut = remainingSupply === 0;
   const [thumbnailSrc, setThumbnailSrc] = useState(() =>
-    getWalrusViewUrl(moment.thumbnailWalrusUri),
+    convertWalrusUriToHttps(moment.thumbnailWalrusUri),
   );
 
   useEffect(() => {
-    const url = getWalrusViewUrl(moment.thumbnailWalrusUri);
+    const url = convertWalrusUriToHttps(moment.thumbnailWalrusUri);
     console.log("[MomentCard] Thumbnail URI:", moment.thumbnailWalrusUri);
     console.log("[MomentCard] Generated URL:", url);
     setThumbnailSrc(url);

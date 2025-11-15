@@ -44,7 +44,7 @@ get_deploy_params() {
     log_section "デプロイパラメータ入力"
 
     # ガス予算の入力
-    GAS_BUDGET=$(prompt_number "ガス予算を入力してください" "100000000")
+    GAS_BUDGET=$(prompt_number "ガス予算を入力してください" "500000000")
 
     echo ""
     echo "📝 入力内容確認"
@@ -174,8 +174,35 @@ parse_deploy_result() {
     else
         log_warning "TRANSFER_POLICY_ID が見つかりませんでした。"
     fi
+
+    # TransferPolicyCap オブジェクトIDを取得
+    local transfer_policy_cap_id=$(jq -r '.objectChanges[]
+        | select(.objectType != null)
+        | select(.objectType | contains("transfer_policy::TransferPolicyCap<"))
+        | .objectId' "$json_file" 2>/dev/null | head -n 1)
+    transfer_policy_cap_id=$(echo "$transfer_policy_cap_id" | tr -d '\n')
+
+    if [[ -n "$transfer_policy_cap_id" ]]; then
+        log_success "TRANSFER_POLICY_CAP_ID: ${transfer_policy_cap_id}"
+    else
+        log_warning "TRANSFER_POLICY_CAP_ID が見つかりませんでした。"
+    fi
+
+    # MomentRegistry オブジェクトIDを取得
+    local moment_registry_id=$(jq -r '.objectChanges[]
+        | select(.objectType != null)
+        | select(.objectType | contains("MomentRegistry"))
+        | .objectId' "$json_file" 2>/dev/null | head -n 1)
+    moment_registry_id=$(echo "$moment_registry_id" | tr -d '\n')
+
+    if [[ -n "$moment_registry_id" ]]; then
+        log_success "MOMENT_REGISTRY_ID: ${moment_registry_id}"
+    else
+        log_warning "MOMENT_REGISTRY_ID が見つかりませんでした。"
+    fi
+
     # 環境変数ファイルを更新
-    update_env_variables "$package_id" "$admin_cap_id" "$upgrade_cap_id" "$transfer_policy_id"
+    update_env_variables "$package_id" "$admin_cap_id" "$upgrade_cap_id" "$transfer_policy_id" "$transfer_policy_cap_id" "$moment_registry_id"
 }
 
 # 環境変数ファイルを更新
@@ -184,6 +211,8 @@ update_env_variables() {
     local admin_cap_id="$2"
     local upgrade_cap_id="$3"
     local transfer_policy_id="$4"
+    local transfer_policy_cap_id="$5"
+    local moment_registry_id="$6"
 
     log_section "環境変数ファイル更新"
 
@@ -207,6 +236,14 @@ update_env_variables() {
         update_env_file "$SELECTED_NETWORK" "TRANSFER_POLICY_ID" "$transfer_policy_id"
     fi
 
+    if [[ -n "$transfer_policy_cap_id" ]]; then
+        update_env_file "$SELECTED_NETWORK" "TRANSFER_POLICY_CAP_ID" "$transfer_policy_cap_id"
+    fi
+
+    if [[ -n "$moment_registry_id" ]]; then
+        update_env_file "$SELECTED_NETWORK" "MOMENT_REGISTRY_ID" "$moment_registry_id"
+    fi
+
     # アクティブアドレスも更新
     if [[ -n "$CURRENT_ADDRESS" ]]; then
         update_env_file "$SELECTED_NETWORK" "ACTIVE_ADDRESS" "$CURRENT_ADDRESS"
@@ -215,7 +252,7 @@ update_env_variables() {
     log_success "環境変数ファイルを更新しました: .env.${SELECTED_NETWORK}"
 
     # 結果を表示
-    display_deploy_result "$package_id" "$admin_cap_id" "$upgrade_cap_id" "$transfer_policy_id"
+    display_deploy_result "$package_id" "$admin_cap_id" "$upgrade_cap_id" "$transfer_policy_id" "$transfer_policy_cap_id" "$moment_registry_id"
 }
 
 # デプロイ結果を表示
@@ -224,6 +261,8 @@ display_deploy_result() {
     local admin_cap_id="$2"
     local upgrade_cap_id="$3"
     local transfer_policy_id="$4"
+    local transfer_policy_cap_id="$5"
+    local moment_registry_id="$6"
 
     log_section "✅ デプロイ成功！"
 
@@ -246,6 +285,18 @@ display_deploy_result() {
     if [[ -n "$transfer_policy_id" ]]; then
         echo "🔄 TRANSFER_POLICY_ID:"
         echo "   ${transfer_policy_id}"
+        echo ""
+    fi
+
+    if [[ -n "$transfer_policy_cap_id" ]]; then
+        echo "🔐 TRANSFER_POLICY_CAP_ID:"
+        echo "   ${transfer_policy_cap_id}"
+        echo ""
+    fi
+
+    if [[ -n "$moment_registry_id" ]]; then
+        echo "📋 MOMENT_REGISTRY_ID:"
+        echo "   ${moment_registry_id}"
         echo ""
     fi
 

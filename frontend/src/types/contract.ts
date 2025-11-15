@@ -77,3 +77,36 @@ export interface UserKiosk {
   kioskId: string;
   capId: string;
 }
+
+/**
+ * Moment Registry のメタデータ
+ * Contract の MomentMetadata 構造体に対応
+ */
+export interface MomentMetadata {
+  moment_id: string;
+  match_id: string;
+  fighter_a: string;
+  fighter_b: string;
+  moment_type: string;
+  video_blob_id: string;
+  thumbnail_blob_id: string;
+  max_supply: string;
+  current_supply: string;
+  creator: string;
+  is_active: boolean;
+}
+
+/**
+ * Moment Registry オブジェクト
+ */
+export interface MomentRegistry {
+  id: { id: string };
+  moments: {
+    type: string;
+    fields: {
+      id: { id: string };
+      size: string;
+    };
+  };
+  moment_ids: string[];
+}
