@@ -24,31 +24,31 @@
 
 ---
 
-## 🌟 プロジェクトハイライト
-## 🌟 Project Highlights
+## 🌟 プロジェクトハイライト<br>
+## Project Highlights
 
-### 💰 解決する課題
-**💰 Problem We're Solving**
+### 💰 解決する課題<br>
+**Problem We're Solving**
 
-**格闘技ライブ配信の最大の課題：「後でアーカイブで見れば良い」**
+**格闘技ライブ配信の最大の課題：「後でアーカイブで見れば良い」**<br>
 **The biggest challenge in combat sports live streaming: "I'll just watch the archive later."**
 
-現状のスポーツライブ配信には以下の深刻な課題があります：
+現状のスポーツライブ配信には以下の深刻な課題があります：<br>
 Current sports live streaming faces the following critical issues:
 
-- ❌ **リアルタイム視聴の動機づけ不足**：見逃しても後でアーカイブで見れば良い、という心理が働き、**ライブ配信の価値が著しく低下**
+- ❌ **リアルタイム視聴の動機づけ不足**：見逃しても後でアーカイブで見れば良い、という心理が働き、**ライブ配信の価値が著しく低下**<br>
   **Lack of real-time viewing motivation**: The mindset of "I can just watch the archive later" **severely devalues live streaming.**
-- ❌ 配信プラットフォームに動画が閉じ込められている
+- ❌ 配信プラットフォームに動画が閉じ込められている<br>
   Videos are locked into centralized platforms.
-- ❌ ファンが「自分が見たあの瞬間」を公式に所有できない
+- ❌ ファンが「自分が見たあの瞬間」を公式に所有できない<br>
   Fans cannot officially own "that decisive moment they witnessed."
-- ❌ 選手や主催団体への二次的収益還元が不十分
+- ❌ 選手や主催団体への二次的収益還元が不十分<br>
   Insufficient secondary revenue return to athletes and organizers.
 
-### 🎯 Fight Moments NFTの解決策
-**🎯 Fight Moments NFT Solution**
+### 🎯 Fight Moments NFTの解決策<br>
+**Fight Moments NFT Solution**
 
-**「今見ないと手に入らない」— リアルタイム視聴に革新的インセンティブを創出**
+**「今見ないと手に入らない」— リアルタイム視聴に革新的インセンティブを創出**<br>
 **"Watch now or miss out forever" — creating revolutionary incentives for real-time viewing.**
 
 | 特徴 | 説明 |
@@ -67,74 +67,74 @@ Current sports live streaming faces the following critical issues:
 | 🎫 **Limited Supply + Serial Numbers** | On-chain supply management guarantees scarcity. |
 | 💸 **Secondary Market Ready** | Fan-to-fan trading is enabled via Marketplace. |
 
-### 💡 ライブ視聴の動機づけ — 本プロジェクトの核心価値
-**💡 Live Viewing Motivation — Core Value Proposition**
+### 💡 ライブ視聴の動機づけ — 本プロジェクトの核心価値<br>
+**Live Viewing Motivation — Core Value Proposition**
 
-**リアルタイムMintがスポーツライブ配信に革命をもたらす理由**
+**リアルタイムMintがスポーツライブ配信に革命をもたらす理由**<br>
 **How real-time minting revolutionizes sports live streaming.**
 
-従来の配信モデルでは、ファンは「後でアーカイブで見ればいい」と考え、ライブ視聴率が低迷。
+従来の配信モデルでは、ファンは「後でアーカイブで見ればいい」と考え、ライブ視聴率が低迷。<br>
 In traditional models, fans think "I'll just watch the archive later," leading to low live viewership.
-本プロジェクトは、**試合中の数分間だけMint可能な限定NFT**により、この課題を根本から解決します。
+本プロジェクトは、**試合中の数分間だけMint可能な限定NFT**により、この課題を根本から解決します。<br>
 This project fundamentally solves that by offering **limited NFTs mintable only for a few minutes during the match.**
 
 #### 🎯 4つの心理的インセンティブ
-#### 🎯 Four Psychological Incentives
+#### Four Psychological Incentives
 
-1. **⏰ 時間的希少性**
-   **⏰ Time-based Scarcity (FOMO)**
-   - 試合中の決定的瞬間発生 → 公式が即座に登録 → **数分間だけMint可能**
+1. **⏰ 時間的希少性**<br>
+   **Time-based Scarcity (FOMO)**
+   - 試合中の決定的瞬間発生 → 公式が即座に登録 → **数分間だけMint可能**<br>
      A decisive moment happens → officials register it instantly → **mintable only for a few minutes.**
-   - 見逃したら**二度と初回発行権は手に入らない**
+   - 見逃したら**二度と初回発行権は手に入らない**<br>
      Miss it and **you'll never get primary issuance rights again.**
-   - アーカイブ視聴者は二次市場でしか入手不可（高額化の可能性）
+   - アーカイブ視聴者は二次市場でしか入手不可（高額化の可能性）<br>
      Archive viewers can only obtain it via the secondary market (potentially at premium prices).
 
-2. **🎫 その場にいた証明**
-   **🎫 Proof of Presence**
-   - 歴史的瞬間を「目撃した証人」としてのNFT
+2. **🎫 その場にいた証明**<br>
+   **Proof of Presence**
+   - 歴史的瞬間を「目撃した証人」としてのNFT<br>
      NFT as a "witness certificate" of historic moments.
-   - タイムスタンプとシリアルナンバーで立ち会った証拠を永久保存
+   - タイムスタンプとシリアルナンバーで立ち会った証拠を永久保存<br>
      Timestamps and serial numbers permanently preserve proof of attendance.
-   - コレクターズアイテムとしての価値
+   - コレクターズアイテムとしての価値<br>
      Strong value as a collector's item.
 
-3. **🏆 先着順競争**
-   **🏆 First-come, First-served Competition**
-   - 限定100人など、供給数を厳しく制限
+3. **🏆 先着順競争**<br>
+   **First-come, First-served Competition**
+   - 限定100人など、供給数を厳しく制限<br>
      Strict supply limits (e.g., only 100 mints).
-   - 早くMintするほど若いシリアルナンバー（#1, #2...）
+   - 早くMintするほど若いシリアルナンバー（#1, #2...）<br>
      Earlier mints receive lower serial numbers (#1, #2, ...).
-   - コミュニティ内でのステータス獲得
+   - コミュニティ内でのステータス獲得<br>
      Creates status and bragging rights within the community.
 
-4. **📈 投資価値**
-   **📈 Investment Value**
-   - リアルタイム参加者のみが持つ希少NFT → 高い二次流通価値
+4. **📈 投資価値**<br>
+   **Investment Value**
+   - リアルタイム参加者のみが持つ希少NFT → 高い二次流通価値<br>
      Rare NFTs held only by real-time participants → strong secondary market value.
-   - 伝説的試合のNFTは将来的に高値取引の可能性
+   - 伝説的試合のNFTは将来的に高値取引の可能性<br>
      Legendary fight NFTs may trade at premium prices in the future.
-   - ファン活動と投資を両立
+   - ファン活動と投資を両立<br>
      Aligns passionate fandom with investment opportunities.
 
-#### 📊 ビジネスインパクト
-#### 📊 Business Impact
+#### 📊 ビジネスインパクト<br>
+#### Business Impact
 
-- **PPV(Pay-Per-View)購入動機**: NFTを手に入れるために、ライブ配信を購入
+- **PPV(Pay-Per-View)購入動機**: NFTを手に入れるために、ライブ配信を購入<br>
   **PPV Purchase Motivation**: Fans buy live stream access to obtain NFTs.
-- **広告価値向上**: リアルタイム視聴者数の増加 → 広告単価UP
+- **広告価値向上**: リアルタイム視聴者数の増加 → 広告単価UP<br>
   **Advertising Value Increase**: Higher real-time viewer counts → higher ad unit prices.
-- **コミュニティ活性化**: NFT保有者限定イベントなど、エンゲージメント施策の基盤
+- **コミュニティ活性化**: NFT保有者限定イベントなど、エンゲージメント施策の基盤<br>
   **Community Activation**: Foundation for engagement initiatives such as NFT-holder-only events.
-- **選手・団体収益**: 二次流通ロイヤリティで継続的収益
+- **選手・団体収益**: 二次流通ロイヤリティで継続的収益<br>
   **Athlete/Organizer Revenue**: Continuous revenue through secondary market royalties.
-- **ファイター直接収益**: NFT Mintに支払われた金額は運営とファイターで分配され、ファイター自身の収益にもなる
+- **ファイター直接収益**: NFT Mintに支払われた金額は運営とファイターで分配され、ファイター自身の収益にもなる<br>
   **Direct Fighter Revenue**: Mint fees are shared between organizers and both fighters, becoming direct income for the fighters.
 
-→ ### **「後でアーカイブで見ればいい」から「今見ないと絶対損する」へ**
+→ ### **「後でアーカイブで見ればいい」から「今見ないと絶対損する」へ**<br>
 → ### **From "I'll watch the archive later" to "I must watch live or I'll lose out."**
 
-### ⚡ 技術的革新性
+### ⚡ 技術的革新性<br>
 **⚡ Technical Innovation**
 
 - ✅ **リアルタイムMint**: 試合中の決定的瞬間を即座にNFT化、ライブ視聴者限定Mint
@@ -148,16 +148,16 @@ This project fundamentally solves that by offering **limited NFTs mintable only 
 - ✅ **Admin権限制御**: AdminCapによる品質保証された登録フロー
   ✅ **Admin Authorization Control**: Quality-assured registration flow via `AdminCap`.
 
-### 🚀 今後の展望
+### 🚀 今後の展望<br>
 **Future Vision**
 
-- 🥊 伝説級ファイトのNFTがオンチェーンで歴史的資産として扱われ、美術品オークションさながらの規模で取引される
+- 🥊 伝説級ファイトのNFTがオンチェーンで歴史的資産として扱われ、美術品オークションさながらの規模で取引される<br>
   Legendary fights are recognized on-chain as historical digital assets, trading at scales comparable to fine art auctions.
-- 🕶️ AR/VRデバイスと連動し、NFTを保有していると“その瞬間”のリングサイドにテレポートしたような没入体験が解禁される
+- 🕶️ AR/VRデバイスと連動し、NFTを保有していると“その瞬間”のリングサイドにテレポートしたような没入体験が解禁される<br>
   Deep AR/VR integration lets NFT holders "teleport" ringside to re-experience their owned moments in fully immersive environments.
-- 🎫 チケット/NFT/ファンクラブIDがオンチェーンで一元化され、「ライブ参加 → モーメント所有 → コミュニティ参加」がシームレスになる
+- 🎫 チケット/NFT/ファンクラブIDがオンチェーンで一元化され、「ライブ参加 → モーメント所有 → コミュニティ参加」がシームレスになる<br>
   Tickets, NFTs, and fan-club IDs are unified on-chain so that "attend live → own the moment → join the community" becomes a seamless flow.
-- 🤝 選手・ジム・団体が共同でDAOを形成し、NFT売上の一部が次世代ファイター育成基金として自動配分されるエコシステムを構築
+- 🤝 選手・ジム・団体が共同でDAOを形成し、NFT売上の一部が次世代ファイター育成基金として自動配分されるエコシステムを構築<br>
   Fighters, gyms, and promotions form DAOs where a portion of NFT revenue is automatically routed into funds that nurture the next generation of fighters.
 
 ---
