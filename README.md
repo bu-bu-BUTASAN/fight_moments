@@ -15,12 +15,9 @@
 
 ## 📺 デモ
 
-<!-- デモ動画を撮影後、以下のコメントを外してYouTube/LoomのURLを記載してください -->
-<!--
-[![Demo Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://youtu.be/YOUR_VIDEO_ID)
+[![Demo Video](https://img.youtube.com/vi/FnLvfVf7y44/maxresdefault.jpg)](https://youtu.be/FnLvfVf7y44)
 
-📺 **[デモ動画を見る](https://youtu.be/YOUR_VIDEO_ID)** - 1分30秒のウォークスルー
--->
+📺 **[デモ動画を見る](https://youtu.be/FnLvfVf7y44)** - 1分30秒のウォークスルー
 
 🌐 **ライブデモ**: https://fight-moments.pages.dev/
 📦 **Smart Contract**: [View on Suiscan](https://suiscan.xyz/testnet/object/0xcb62132563f5a2a606950ae6417665d80fb06048bb2eb832618b5ee0376f4401)
@@ -512,12 +509,9 @@ Made with ❤️ for Sui × ONE Championship Hackathon
 
 ## 📺 Demo
 
-<!-- After recording demo video, uncomment below and insert your YouTube/Loom URL -->
-<!--
-[![Demo Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://youtu.be/YOUR_VIDEO_ID)
+[![Demo Video](https://img.youtube.com/vi/FnLvfVf7y44/maxresdefault.jpg)](https://youtu.be/FnLvfVf7y44)
 
-📺 **[Watch Demo Video](https://youtu.be/YOUR_VIDEO_ID)** - 1m30s Walkthrough
--->
+📺 **[Watch Demo Video](https://youtu.be/FnLvfVf7y44)** - 1m30s Walkthrough
 
 🌐 **Live Demo**: https://fight-moments.pages.dev/
 📦 **Smart Contract**: [View on Suiscan](https://suiscan.xyz/testnet/object/0xcb62132563f5a2a606950ae6417665d80fb06048bb2eb832618b5ee0376f4401)
